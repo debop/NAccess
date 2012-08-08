@@ -1,0 +1,12 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\FontLink\SystemLink]
+"Andale Mono"="³ª´®°íµñÄÚµù.ttf,³ª´®°íµñÄÚµù"
+"Bitstream Vera Sans Mono"="³ª´®°íµñÄÚµù.ttf,³ª´®°íµñÄÚµù"
+"Consolas"="³ª´®°íµñÄÚµù.ttf,³ª´®°íµñÄÚµù"
+"Lucida Console"="³ª´®°íµñ.ttf,³ª´®°íµñ"
+"Lucida Sans Typewriter"="³ª´®°íµñÄÚµù.ttf,³ª´®°íµñÄÚµù"
+"Lucida Sans Unicode"="malgun.ttf,¸¼Àº °íµñ"
+"Lucida Grande"="³ª´®°íµñ.ttf,³ª´®°íµñ"
+"Monaco"="gulim.ttc,µ¸¿òÃ¼"
+"Segoe UI Mono"="³ª´®°íµñÄÚµù.ttf,³ª´®°íµñÄÚµù"

@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0E80856E-5FF9-430B-88B4-C46F38D06CCF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NSoft.NAccess</RootNamespace>
+    <AssemblyName>NSoft.NAccess</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\lib\net-4.0\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor">
+      <HintPath>..\..\lib\net-4.0\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentNHibernate">
+      <HintPath>..\..\lib\net-4.0\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation">
+      <HintPath>..\..\lib\net-4.0\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\..\lib\net-4.0\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\..\lib\net-4.0\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\..\lib\net-4.0\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BackgroundServices\BackgroundServiceEx.cs" />
+    <Compile Include="Enums\ActorKinds.cs" />
+    <Compile Include="Enums\AuthorityKinds.cs" />
+    <Compile Include="Enums\CalendarOwnerKind.cs" />
+    <Compile Include="Enums\GroupKinds.cs" />
+    <Compile Include="Enums\HierarchyContainsKinds.cs" />
+    <Compile Include="NAccessContext.cs" />
+    <Compile Include="NAccessContext.Current.cs" />
+    <Compile Include="NAccessContext.Domains.cs" />
+    <Compile Include="NAccessContext.Linq.cs" />
+    <Compile Include="BackgroundServices\IBackgroundService.cs" />
+    <Compile Include="BackgroundServices\PreCaches\AdoPreCacheService.cs" />
+    <Compile Include="BackgroundServices\PreCaches\IAdoPreCacheService.cs" />
+    <Compile Include="Domain\Model\Calendars\Calendar.cs" />
+    <Compile Include="Domain\Model\Calendars\CalendarRule.cs" />
+    <Compile Include="Domain\Model\Calendars\CalendarRuleOfUser.cs" />
+    <Compile Include="Domain\Model\Calendars\Mappings\CalendarMap.cs" />
+    <Compile Include="Domain\Model\Calendars\Mappings\CalendarRuleMap.cs" />
+    <Compile Include="Domain\Model\Calendars\Mappings\CalendarRuleOfUserMap.cs" />
+    <Compile Include="Domain\Model\Calendars\Mappings\WorkTimeByTimeBaseMap.cs" />
+    <Compile Include="Domain\Model\Calendars\WorkTimeByDay.cs" />
+    <Compile Include="Domain\Model\Calendars\WorkTimeByHour.cs" />
+    <Compile Include="Domain\Model\Calendars\WorkTimeByMinute.cs" />
+    <Compile Include="Domain\Model\Calendars\WorkTimeByRange.cs" />
+    <Compile Include="Domain\Model\Calendars\WorkTimeByTimeBase.cs" />
+    <Compile Include="Domain\Model\ICompany.cs" />
+    <Compile Include="Domain\Model\IWorkTimeByTime.cs" />
+    <Compile Include="Domain\Model\Organizations\Code.cs" />
+    <Compile Include="Domain\Model\Organizations\CodeGroup.cs" />
+    <Compile Include="Domain\Model\Organizations\Company.cs" />
+    <Compile Include="Domain\Model\Organizations\Department.cs" />
+    <Compile Include="Domain\Model\Organizations\DepartmentMember.cs" />
+    <Compile Include="Domain\Model\Organizations\EmployeeCodeBase.cs" />
+    <Compile Include="Domain\Model\Organizations\EmployeeGrade.cs" />
+    <Compile Include="Domain\Model\Organizations\EmployeePosition.cs" />
+    <Compile Include="Domain\Model\Organizations\EmployeeTitle.cs" />
+    <Compile Include="Domain\Model\Organizations\Group.cs" />
+    <Compile Include="Domain\Model\Organizations\GroupActor.cs" />
+    <Compile Include="Domain\Model\Organizations\GroupActorIdentity.cs" />
+    <Compile Include="Domain\Model\Organizations\Mappings\CodeMap.cs" />
+    <Compile Include="Domain\Model\Organizations\Mappings\CompanyMap.cs" />
+    <Compile Include="Domain\Model\Organizations\Mappings\DepartmentMap.cs" />
+    <Compile Include="Domain\Model\Organizations\Mappings\DepartmentMemberMap.cs" />
+    <Compile Include="Domain\Model\Organizations\Mappings\EmployeeCodeBaseMap.cs" />
+    <Compile Include="Domain\Model\Organizations\Mappings\GroupActorMap.cs" />
+    <Compile Include="Domain\Model\Organizations\Mappings\GroupMap.cs" />
+    <Compile Include="Domain\Model\Organizations\Mappings\NodePositionMap.cs" />
+    <Compile Include="Domain\Model\Organizations\Mappings\UserMap.cs" />
+    <Compile Include="Domain\Model\Organizations\User.cs" />
+    <Compile Include="Domain\Model\Products\Favorite.cs" />
+    <Compile Include="Domain\Model\Products\File.cs" />
+    <Compile Include="Domain\Model\Products\FileMapping.cs" />
+    <Compile Include="Domain\Model\Products\Mappings\FavoriteMap.cs" />
+    <Compile Include="Domain\Model\Products\Mappings\FileMap.cs" />
+    <Compile Include="Domain\Model\Products\Mappings\FileMappingMap.cs" />
+    <Compile Include="Domain\Model\Products\Mappings\MasterCodeItemMap.cs" />
+    <Compile Include="Domain\Model\Products\Mappings\MasterCodeMap.cs" />
+    <Compile Include="Domain\Model\Products\Mappings\MenuMap.cs" />
+    <Compile Include="Domain\Model\Products\Mappings\MenuTemplateMap.cs" />
+    <Compile Include="Domain\Model\Products\Mappings\ProductMap.cs" />
+    <Compile Include="Domain\Model\Products\Mappings\ResourceActorMap.cs" />
+    <Compile Include="Domain\Model\Products\Mappings\ResourceMap.cs" />
+    <Compile Include="Domain\Model\Products\Mappings\UserConfigMap.cs" />
+    <Compile Include="Domain\Model\Products\Mappings\UserLoginLogMap.cs" />
+    <Compile Include="Domain\Model\Products\MasterCode.cs" />
+    <Compile Include="Domain\Model\Products\MasterCodeItem.cs" />
+    <Compile Include="Domain\Model\Products\Menu.cs" />
+    <Compile Include="Domain\Model\Products\MenuTemplate.cs" />
+    <Compile Include="Domain\Model\Products\Product.cs" />
+    <Compile Include="Domain\Model\Products\Resource.cs" />
+    <Compile Include="Domain\Model\Products\ResourceActor.cs" />
+    <Compile Include="Domain\Model\Products\ResourceActorIdentity.cs" />
+    <Compile Include="Domain\Model\Products\UserConfig.cs" />
+    <Compile Include="Domain\Model\Products\UserConfigIdentity.cs" />
+    <Compile Include="Domain\Model\Products\UserLoginLog.cs" />
+    <Compile Include="Domain\Repositories\CalendarRepository.cs" />
+    <Compile Include="Domain\Repositories\CalendarRepository.WorkTimeByUnitTime.cs" />
+    <Compile Include="Domain\DomainContext.cs" />
+    <Compile Include="Domain\Repositories\NAccessRepositoryBase.cs" />
+    <Compile Include="Domain\Repositories\LoggingRepository.cs" />
+    <Compile Include="Domain\Repositories\LoggingRepository.LoginLog.cs" />
+    <Compile Include="Domain\Repositories\OrganizationRepository.Code.cs" />
+    <Compile Include="Domain\Repositories\OrganizationRepository.Company.cs" />
+    <Compile Include="Domain\Repositories\OrganizationRepository.cs" />
+    <Compile Include="Domain\Repositories\OrganizationRepository.Department.cs" />
+    <Compile Include="Domain\Repositories\OrganizationRepository.EmployeeCodes.cs" />
+    <Compile Include="Domain\Repositories\OrganizationRepository.Groups.cs" />
+    <Compile Include="Domain\Repositories\OrganizationRepository.User.cs" />
+    <Compile Include="Domain\Repositories\ProductRepository.Authority.cs" />
+    <Compile Include="Domain\Repositories\ProductRepository.cs" />
+    <Compile Include="Domain\Repositories\ProductRepository.Favorites.cs" />
+    <Compile Include="Domain\Repositories\ProductRepository.Files.cs" />
+    <Compile Include="Domain\Repositories\ProductRepository.MasterCode.cs" />
+    <Compile Include="Domain\Repositories\ProductRepository.Menus.cs" />
+    <Compile Include="Domain\Repositories\ProductRepository.Products.cs" />
+    <Compile Include="Domain\Repositories\ProductRepository.Resources.cs" />
+    <Compile Include="Domain\Repositories\ProductRepository.UserConfig.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Tools\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\NFramework-svn\src\NFramework.Data.NHibernateEx\NFramework.Data.NHibernateEx-vs2010.csproj">
+      <Project>{c19799f1-c38e-4478-a122-c958153f0ad6}</Project>
+      <Name>NFramework.Data.NHibernateEx-vs2010</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\NFramework-svn\src\NFramework.Data\NFramework.Data-vs2010.csproj">
+      <Project>{eb7beb5b-6813-4a60-b453-93060be22c30}</Project>
+      <Name>NFramework.Data-vs2010</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\NFramework-svn\src\NFramework\NFramework-vs2010.csproj">
+      <Project>{0367376a-deb0-4cbe-bdbf-d685add5cab3}</Project>
+      <Name>NFramework-vs2010</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="default.build" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

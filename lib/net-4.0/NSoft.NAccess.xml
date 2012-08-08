@@ -1,0 +1,4725 @@
+<?xml version="1.0"?>
+<doc>
+  <assembly>
+    <name>NSoft.NAccess</name>
+  </assembly>
+  <members>
+    <member name="T:NSoft.NAccess.BackgroundServices.AdoPreCacheService">
+      <summary>
+            시스템이 사용할 Data를 RDBMS에서 미리 Cache 할 수 있도록, Background 에서 필요한 Data를 Cache에 올라오도록 SQL문장을 수행한다.
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.BackgroundServices.IAdoPreCacheService">
+      <summary>
+            시스템이 사용할 Data를 RDBMS에서 미리 Cache 할 수 있도록, Background 에서 필요한 Data를 Cache에 올라오도록 SQL문장을 수행한다.
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.BackgroundServices.IBackgroundService">
+      <summary>
+            백그라운드에서 수행하는 서비스를 나타내는 인터페이스입니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.BackgroundServices.IBackgroundService.Execute(System.Object[])">
+      <summary>
+            서비스를 실행합니다.
+            </summary>
+      <param name="args">실행 인자들</param>
+    </member>
+    <member name="P:NSoft.NAccess.BackgroundServices.IAdoPreCacheService.AdoRepository">
+      <summary>
+        <see cref="T:NSoft.NFramework.Data.IAdoRepository" /> 인스턴스
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.BackgroundServices.IAdoPreCacheService.SqlStatements">
+      <summary>
+            실행할 SQL Statements
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.BackgroundServices.AdoPreCacheService.#ctor(NSoft.NFramework.Data.IAdoRepository,System.Collections.Generic.IEnumerable{System.String})">
+      <summary>
+            생성자
+            </summary>
+      <param name="repository">Ado Repository</param>
+      <param name="sqlStatements">실행할 쿼리문의 컬렉션</param>
+    </member>
+    <member name="M:NSoft.NAccess.BackgroundServices.AdoPreCacheService.Execute(System.Object[])">
+      <summary>
+            지정된 SQL 문장을 실행하여 RDBMS가 관련 Data를 메모리에 Cache 할 수 있도록 한다.
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.BackgroundServices.AdoPreCacheService.AdoRepository">
+      <summary>
+            AdoRepository
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.BackgroundServices.AdoPreCacheService.SqlStatements">
+      <summary>
+            RDBMS에서 데이타를 미리 캐시하기 위해 실행할 SQL 문장의 컬렉션
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.BackgroundServices.BackgroundServiceEx">
+      <summary>
+        <see cref="T:NSoft.NAccess.BackgroundServices.IBackgroundService" /> 의 확장 메소드를 제공합니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.BackgroundServices.BackgroundServiceEx.ExecuteServiceAsync(NSoft.NAccess.BackgroundServices.IBackgroundService,System.Object[])">
+      <summary>
+            비동가 방식으로 서비스를 실행시킵니다.
+            </summary>
+      <param name="backgroundService">실행할 Background Service 인스턴스</param>
+      <param name="args">실행 인자</param>
+      <returns>실행 결과를 담은 <see cref="T:System.Threading.Tasks.Task" /></returns>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.Calendar">
+      <summary>
+            Calenar 정보
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Calendar.CompanyCode">
+      <summary>
+            소속 회사
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Calendar.Code">
+      <summary>
+            Calendar 코드
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Calendar.Name">
+      <summary>
+            Calendar 명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Calendar.ProjectId">
+      <summary>
+            프로젝트 Calendar인 경우 관련 프로젝트 Id
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Calendar.ResourceId">
+      <summary>
+            리소스 Calendar인 경우 관련 Resource Id
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Calendar.TimeZone">
+      <summary>
+            TimeZone 정보
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Calendar.Parent">
+      <summary>
+            부모 노드
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Calendar.Children">
+      <summary>
+            자식 노드들
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Calendar.NodePosition">
+      <summary>
+            TreeNode의 위치
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Calendar.Rules">
+      <summary>
+            Calendar Working Time 생성 규칙(Rule)
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Calendar.Description">
+      <summary>
+            설명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Calendar.ExAttr">
+      <summary>
+            확장속성
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Calendar.UpdateTimestamp">
+      <summary>
+            최종갱신일
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Calendar.IsBaseCalendar">
+      <summary>
+            Base Calendar 인가? (Calendar Owner Kind가 Standard 여야 한다)
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.CalendarLocale">
+      <summary>
+            Calendar 지역화 정보
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.CalendarLocale.Name">
+      <summary>
+            Calendar 명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.CalendarLocale.Description">
+      <summary>
+            설명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.CalendarLocale.ExAttr">
+      <summary>
+            확장속성
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.CalendarRule">
+      <summary>
+            Calendar Rule Data
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.CalendarRule.Calendar">
+      <summary>
+            Calendar
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.CalendarRule.Name">
+      <summary>
+            규칙 명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.CalendarRule.DayOrException">
+      <summary>
+            특정 날짜인지, 아니면 휴일 지정 예외 규칙인지 나타낸다.
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.CalendarRule.ExceptionType">
+      <summary>
+            예외 규칙의 종류
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.CalendarRule.ExceptionPattern">
+      <summary>
+            예외 패턴 (아직 준비중이다)
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.CalendarRule.ExceptionClassName">
+      <summary>
+            예외 패턴을 적용할 클래스 타입명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.CalendarRule.IsWorking">
+      <summary>
+            일하는 날인가?
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.CalendarRule.RulePeriod">
+      <summary>
+            규칙이 적용되는 시간 범위
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.CalendarRule.Description">
+      <summary>
+            규칙 설명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.CalendarRule.ExAttr">
+      <summary>
+            확장 속성
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.CalendarRule.UpdateTimestamp">
+      <summary>
+            최종갱신일
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.CalendarRuleLocale">
+      <summary>
+        <see cref="T:NSoft.NAccess.Domain.Model.CalendarRule" />의 지역화 정보
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.CalendarRuleLocale.Name">
+      <summary>
+            규칙 명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.CalendarRuleLocale.Description">
+      <summary>
+            규칙 설명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.CalendarRuleLocale.ExAttr">
+      <summary>
+            확장 속성
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.CalendarRuleOfUser">
+      <summary>
+            Calendar Rule Data of User
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.CalendarRuleOfUser.CompanyCode">
+      <summary>
+            사용자 소속 회사
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.CalendarRuleOfUser.UserCode">
+      <summary>
+            사용자 코드
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.CalendarRuleOfUser.CalendarRule">
+      <summary>
+            원본 Calendar Rule 
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.CalendarRuleOfUser.RulePeriod">
+      <summary>
+            규칙이 적용되는 시간 범위
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.CalendarRuleOfUser.IsActive">
+      <summary>
+            활성화 여부
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.CalendarRuleOfUser.Description">
+      <summary>
+            설명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.CalendarRuleOfUser.ExAttr">
+      <summary>
+            확장 속성
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.CalendarRuleOfUser.UpdateTimestamp">
+      <summary>
+            최종갱신일
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.WorkTimeByDay">
+      <summary>
+            일별 작업 시간 정보 (한 레코드가 하루 (One Day)를 표현한다)
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.WorkTimeByTimeBase">
+      <summary>
+            특정 단위 시각의 작업 시간에 대한 정보 (일단위, 시간단위, 분단위, 5분단위, 월단위, 주단위 등 모두 가능하다)
+            </summary>
+      <remarks>
+            NOTE: http://www.nhforge.org/doc/nh/en/index.html#inheritance-tableperconcrete 처럼 하고 싶지만, Id 컬럼에 Identity나 native generator를 사용하지 못한다. 그래서 포기!!!
+            </remarks>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.IWorkTimeByTime">
+      <summary>
+            특정 단위 시각의 작업 시간에 대한 정보의 인터페이스 (일단위, 시간단위, 분단위, 5분단위, 월단위, 주단위 등 모두 가능하다)
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.IWorkTimeByTime.CalendarCode">
+      <summary>
+            작업 시간 계산의 기준이 되는 Calendar 정보
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.IWorkTimeByTime.WorkTime">
+      <summary>
+            기준 작업 시각
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.IWorkTimeByTime.IsWork">
+      <summary>
+            지정둰 <see cref="P:NSoft.NAccess.Domain.Model.IWorkTimeByTime.WorkTime" />이 작업시간이 존재하는지 (<see cref="P:NSoft.NAccess.Domain.Model.IWorkTimeByTime.WorkInMinute" /> &gt; 0) 
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.IWorkTimeByTime.WorkInMinute">
+      <summary>
+            작업시간의 분단위로 표시
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.IWorkTimeByTime.CumulatedInMinute">
+      <summary>
+            작업시간의 누적시간을 분단위로 표시 (시작시각과 소요작업시간만 알면 완료시각을 빨리 알 수 있도록 하기 위해)
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.WorkTimeByTimeBase.#ctor(NSoft.NAccess.Domain.Model.Calendar,System.DateTime)">
+      <summary>
+            생성자
+            </summary>
+      <param name="calendar">기준 Calendar</param>
+      <param name="workTime">기준 시각</param>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.WorkTimeByTimeBase.SetIdentity(System.Guid)">
+      <summary>
+            Set new identity value.
+            </summary>
+      <param name="newId">new identity value</param>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.WorkTimeByTimeBase.CalendarCode">
+      <summary>
+            작업 시간 계산의 기준이 되는 Calendar 코드
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.WorkTimeByTimeBase.WorkTime">
+      <summary>
+            작업 시간
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.WorkTimeByTimeBase.IsWork">
+      <summary>
+            지정둰 <see cref="P:NSoft.NAccess.Domain.Model.WorkTimeByTimeBase.WorkTime" />이 작업시간이 존재하는지 (<see cref="P:NSoft.NAccess.Domain.Model.WorkTimeByTimeBase.WorkInMinute" /> &gt; 0) 
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.WorkTimeByTimeBase.WorkInMinute">
+      <summary>
+            작업시간의 분단위로 표시
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.WorkTimeByTimeBase.CumulatedInMinute">
+      <summary>
+            작업시간의 누적시간을 분단위로 표시 (시작시각과 소요작업시간만 알면 완료시각을 빨리 알 수 있도록 하기 위해)
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.WorkTimeByTimeBase.UpdateTimestamp">
+      <summary>
+            최종 갱신일
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.WorkTimeByDay.DayOfWeek">
+      <summary>
+            요일 정보의 Integer 값
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.WorkTimeByDay.WorkDay">
+      <summary>
+            작업 일
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.WorkTimeByHour">
+      <summary>
+            일별 작업 시간 정보 (한 레코드가 하루 (One Day)를 표현한다)
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.WorkTimeByHour.WorkHour">
+      <summary>
+            작업 시각
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.WorkTimeByMinute">
+      <summary>
+            일별 작업 시간 정보 (한 레코드가 하루 (One Day)를 표현한다)
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.WorkTimeByMinute.WorkMinute">
+      <summary>
+            작업 시각 (분까지 구분되어야 함)
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.WorkTimeByRange">
+      <summary>
+            Calendar Rule에 의해 생성된 실제 Time 정보
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.WorkTimeByRange.#ctor">
+      <summary>
+            생성자
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.WorkTimeByRange.#ctor(NSoft.NAccess.Domain.Model.Calendar,NSoft.NFramework.TimePeriods.ITimePeriod,System.Int32)">
+      <summary>
+            생성자
+            </summary>
+      <param name="calendar">
+      </param>
+      <param name="timeRange">
+      </param>
+      <param name="previousCumulatedWorkInMinute">
+      </param>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.WorkTimeByRange.TimePeriod">
+      <summary>
+            Work Time의 기간 ( Date Part는 같고, Time Part만 변화한다 )
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.Code">
+      <summary>
+            코드 정보
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Code.ItemCode">
+      <summary>
+            코드 아이템 코드
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Code.ItemName">
+      <summary>
+            코드 아이템 명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Code.ViewOrder">
+      <summary>
+            정렬 순서
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Code.IsActive">
+      <summary>
+            사용여부
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Code.IsSysDefined">
+      <summary>
+            시스템 정의 여부
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Code.Description">
+      <summary>
+            설명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Code.ExAttr">
+      <summary>
+            추가 속성
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Code.UpdateTimestamp">
+      <summary>
+            최종 갱신일
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.CodeLocale">
+      <summary>
+            코드 지역화 정보
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.CodeLocale.GroupName">
+      <summary>
+            코드 그룹 명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.CodeLocale.ItemName">
+      <summary>
+            코드 명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.CodeLocale.Description">
+      <summary>
+            설명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.CodeLocale.ExAttr">
+      <summary>
+            추가 속성
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.CodeGroup">
+      <summary>
+            코드 정보중에 코드 그룹만을 따로 정보를 추출하기 위해 사용한다.
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.CodeGroup.CompanyCode">
+      <summary>
+            회사 코드
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.CodeGroup.Code">
+      <summary>
+            코드의 그룹 코드
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.CodeGroup.Name">
+      <summary>
+            코드 그룹 명
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.Company">
+      <summary>
+            회사 정보
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Company.Code">
+      <summary>
+            코드
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Company.Name">
+      <summary>
+            회사명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Company.Description">
+      <summary>
+            설명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Company.IsActive">
+      <summary>
+            사용여부
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Company.ExAttr">
+      <summary>
+            확정 속성
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Company.UpdateTimestamp">
+      <summary>
+            최종갱신일
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.CompanyLocale">
+      <summary>
+            회사 지역화 정보
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.CompanyLocale.Name">
+      <summary>
+            회사명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.CompanyLocale.Description">
+      <summary>
+            설명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.CompanyLocale.ExAttr">
+      <summary>
+            확정 속성
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.Department">
+      <summary>
+            부서 정보  (난이도 때문에 Association을 제거했다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.Department.#ctor">
+      <summary>
+            생성자
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.Department.#ctor(NSoft.NAccess.Domain.Model.Company,System.String,System.String)">
+      <summary>
+            생성자
+            </summary>
+      <param name="company">소속 회사</param>
+      <param name="code">부서 코드</param>
+      <param name="name">부서 명</param>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.Department.GetUsers">
+      <summary>
+            소속 직원의 컬렉션을 반환합니다.
+            </summary>
+      <remarks>
+            ( Members.Select(m=&gt;m.User) 를 직접 호출하는 걸 추천합니다.^^ (IsActive 속성으로 필터링도 가능하기 때문에 )
+            </remarks>
+      <returns>
+      </returns>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Department.Company">
+      <summary>
+            소속 회사
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Department.Code">
+      <summary>
+            부서 코드
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Department.Name">
+      <summary>
+            부서명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Department.EName">
+      <summary>
+            부서 영문 명 (속도를 위해)
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Department.Kind">
+      <summary>
+            부서 종류
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Department.IsActive">
+      <summary>
+            사용 여부
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Department.Description">
+      <summary>
+            설명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Department.ExAttr">
+      <summary>
+            추가 속성
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Department.UpdateTimestamp">
+      <summary>
+            최종갱신일
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Department.Members">
+      <summary>
+            조직 구성원 정보
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.DepartmentLocale">
+      <summary>
+            부서 지역화 정보
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.DepartmentLocale.Name">
+      <summary>
+            부서명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.DepartmentLocale.Description">
+      <summary>
+            설명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.DepartmentLocale.ExAttr">
+      <summary>
+            추가 속성
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.DepartmentMember">
+      <summary>
+            부서의 구성원 정보 (부서 - 사원의 구성 정보)
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.DepartmentMember.#ctor(NSoft.NAccess.Domain.Model.Department,NSoft.NAccess.Domain.Model.User)">
+      <summary>
+            생성자
+            </summary>
+      <param name="department">부서</param>
+      <param name="user">사용자</param>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.DepartmentMember.Department">
+      <summary>
+            부서
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.DepartmentMember.User">
+      <summary>
+            사용자
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.DepartmentMember.EmployeeTitle">
+      <summary>
+            직책 정보
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.DepartmentMember.IsLeader">
+      <summary>
+            조직 책임자인가?
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.DepartmentMember.IsActive">
+      <summary>
+            사용 여부
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.DepartmentMember.Description">
+      <summary>
+            설명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.DepartmentMember.ExAttr">
+      <summary>
+            확장 속성
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.DepartmentMember.UpdateTimestamp">
+      <summary>
+            정보 최종 갱신일
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.EmployeeCodeBase">
+      <summary>
+            사원 관련 코드 정보의 추상화 클래스입니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.EmployeeCodeBase.#ctor">
+      <summary>
+            생성자
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.EmployeeCodeBase.#ctor(NSoft.NAccess.Domain.Model.Company,System.String,System.String)">
+      <summary>
+            생성자
+            </summary>
+      <param name="company">회사</param>
+      <param name="code">직원 코드의 Business적으로 유일한 코드</param>
+      <param name="name">직원 코드 명</param>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.EmployeeCodeBase.Company">
+      <summary>
+            소속 회사
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.EmployeeCodeBase.Code">
+      <summary>
+            직원 코드 값
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.EmployeeCodeBase.Name">
+      <summary>
+            코드 표시 명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.EmployeeCodeBase.EName">
+      <summary>
+            영문 표시 명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.EmployeeCodeBase.ViewOrder">
+      <summary>
+            정렬 순서
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.EmployeeCodeBase.Description">
+      <summary>
+            설명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.EmployeeCodeBase.ExAttr">
+      <summary>
+            추가 속성
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.EmployeeCodeBase.UpdateTimestamp">
+      <summary>
+            최종 갱신 시각
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.EmployeeCodeLocale">
+      <summary>
+            사원관련 코드 정보 (<see cref="T:NSoft.NAccess.Domain.Model.EmployeeCodeBase" />) 에 대한 지역화 정보
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.EmployeeCodeLocale.Name">
+      <summary>
+            코드 표시 명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.EmployeeCodeLocale.Description">
+      <summary>
+            설명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.EmployeeCodeLocale.ExAttr">
+      <summary>
+            추가 속성
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.EmployeeGrade">
+      <summary>
+            직원 직급 (Grade) 정보 (예: 1급, 2급 등 호봉체계에 사용된다.)
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.EmployeeGrade.#ctor">
+      <summary>
+            생성자
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.EmployeeGrade.#ctor(NSoft.NAccess.Domain.Model.Company,System.String,System.String)">
+      <summary>
+            생성자
+            </summary>
+      <param name="company">회사</param>
+      <param name="code">직급 코드</param>
+      <param name="name">직급 명</param>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.EmployeeGrade.ParentCode">
+      <summary>
+            상위 직급 코드
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.EmployeeGrade.HourlyWages">
+      <summary>
+            시간당 급여 (시급)
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.EmployeePosition">
+      <summary>
+            직원의 직위 (Position) (예:사원,대리,과장,차장,부장 등) 을 나타낸다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.EmployeePosition.#ctor">
+      <summary>
+            생성자
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.EmployeePosition.#ctor(NSoft.NAccess.Domain.Model.Company,System.String,System.String)">
+      <summary>
+            생성자
+            </summary>
+      <param name="company">회사</param>
+      <param name="code">직위 Code</param>
+      <param name="name">직위 명</param>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.EmployeeTitle">
+      <summary>
+            직책 (보직) 을 나타낸다. (개발본부장, TFT 팀장, 경영지원실장 등)
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.EmployeeTitle.#ctor">
+      <summary>
+            생성자
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.EmployeeTitle.#ctor(NSoft.NAccess.Domain.Model.Company,System.String,System.String)">
+      <summary>
+            생성자
+            </summary>
+      <param name="company">회사</param>
+      <param name="code">직책 코드</param>
+      <param name="name">직책 명</param>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.Group">
+      <summary>
+            가상의 조직을 나타내는 그룹 정보 (그룹의 구성은은 <see cref="T:NSoft.NAccess.Domain.Model.GroupActor" />이다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.Group.#ctor(NSoft.NAccess.Domain.Model.Company,System.String,System.String,NSoft.NAccess.GroupKinds)">
+      <summary>
+            가상의 조직
+            </summary>
+      <param name="company">
+      </param>
+      <param name="code">
+      </param>
+      <param name="name">
+      </param>
+      <param name="kind">
+      </param>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Group.Company">
+      <summary>
+            소속 회사
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Group.Code">
+      <summary>
+            그룹 코드
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Group.Name">
+      <summary>
+            그룹 명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Group.Kind">
+      <summary>
+            그룹 종류
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Group.IsActive">
+      <summary>
+            사용 여부
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Group.SqlStatement">
+      <summary>
+            동적으로 그룹을 정의할 때 사용할 SqlStatement 문장
+            TODO : 동적 그룹 조회 기능 추가할 것
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Group.Description">
+      <summary>
+            설명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Group.ExAttr">
+      <summary>
+            추가 속성
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Group.UpdateTimestamp">
+      <summary>
+            최종갱신일
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.GroupLocale">
+      <summary>
+            그룹 지역화 정보
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.GroupLocale.Name">
+      <summary>
+            그룹 명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.GroupLocale.SqlStatement">
+      <summary>
+            동적으로 그룹을 정의할 때 사용할 SqlStatement 문장
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.GroupLocale.Description">
+      <summary>
+            설명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.GroupLocale.ExAttr">
+      <summary>
+            추가 속성
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.GroupActor">
+      <summary>
+            그룹-구성원 정보
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.GroupActor.#ctor(NSoft.NAccess.Domain.Model.Group,System.String,NSoft.NAccess.ActorKinds)">
+      <summary>
+            생성자
+            </summary>
+      <param name="group">그룹</param>
+      <param name="actorCode">그룹 소속원 Id</param>
+      <param name="actorKind">소속원 종류 (사용자|부서|회사 등)</param>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.GroupActor.#ctor(System.String,System.String,System.String,NSoft.NAccess.ActorKinds)">
+      <summary>
+            생성자
+            </summary>
+      <param name="companyCode">회사코드</param>
+      <param name="groupCode">그룹 코드</param>
+      <param name="actorCode">소속원 코드</param>
+      <param name="actorKind">소속원 종류 (회사|부서|사용자 등)</param>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.GroupActor.#ctor(NSoft.NAccess.Domain.Model.GroupActorIdentity)">
+      <summary>
+            생성자
+            </summary>
+      <param name="identity">
+      </param>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.GroupActor.Descriptoin">
+      <summary>
+            설명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.GroupActor.ExAttr">
+      <summary>
+            확장 속성
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.GroupActor.UpdateTimestamp">
+      <summary>
+            최신 갱신 일자
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.GroupActorIdentity">
+      <summary>
+            Composite Id of GroupActor
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.GroupActorIdentity.CompanyCode">
+      <summary>
+            회사 코드
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.GroupActorIdentity.GroupCode">
+      <summary>
+            그룹 코드
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.GroupActorIdentity.ActorCode">
+      <summary>
+            그룹 소속원 코드
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.GroupActorIdentity.ActorKind">
+      <summary>
+            그룹 소속원 종류 (회사|부서|사용자 ...)
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.User">
+      <summary>
+            사용자 정보 (직원을 포함한 사용자이다)
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.User.#ctor">
+      <summary>
+            생성자
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.User.#ctor(NSoft.NAccess.Domain.Model.Company,System.String)">
+      <summary>
+            생성자
+            </summary>
+      <param name="company">소속 회사</param>
+      <param name="code">사용자 코드</param>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.User.Company">
+      <summary>
+            소속 회사
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.User.Code">
+      <summary>
+            사용자 코드 (Business 적으로 Unique한 값을 나타낸다) (Login Id 또는 EmpNo 등이 쓰일 수 있다)
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.User.Name">
+      <summary>
+            사용자 명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.User.EName">
+      <summary>
+            User English Name (for performance)
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.User.EmpNo">
+      <summary>
+            사번 (Id, LoginId 와는 별개입니다!!!) 
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.User.Position">
+      <summary>
+            직위 (대리, 과장, 부장, 이사 등)를 나타냄
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.User.Grade">
+      <summary>
+            직급 (1급, 3급 등 호봉 체계를 나타냄)
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.User.Kind">
+      <summary>
+            사용자 종류
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.User.LoginId">
+      <summary>
+            사용자 로그인 계정
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.User.Password">
+      <summary>
+            사용자 로그인 비밀번호
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.User.IdentityNumber">
+      <summary>
+            주민 번호
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.User.RoleCode">
+      <summary>
+            사용자 역할 코드
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.User.Email">
+      <summary>
+            Email Address
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.User.Telephone">
+      <summary>
+            유선전화번호
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.User.MobilePhone">
+      <summary>
+            휴대전화번호
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.User.IsActive">
+      <summary>
+            사용여부
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.User.StatusFlag">
+      <summary>
+            사용자 상태 Flag (파견|휴직|퇴직 등)
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.User.Description">
+      <summary>
+            설명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.User.ExAttr">
+      <summary>
+            추가 속성
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.User.Members">
+      <summary>
+            조직 구성원 정보
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.User.UpdateTimestamp">
+      <summary>
+            최종 갱신 시각
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.UserLocale">
+      <summary>
+            사용자 지역화 정보
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.UserLocale.Name">
+      <summary>
+            User Name
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.UserLocale.Description">
+      <summary>
+            설명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.UserLocale.ExAttr">
+      <summary>
+            추가 속성
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.Favorite">
+      <summary>
+            즐겨찾기 정보
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.Favorite.#ctor(NSoft.NAccess.Domain.Model.Product,NSoft.NAccess.Domain.Model.Company,System.String,NSoft.NAccess.ActorKinds,System.String)">
+      <summary>
+            생성자
+            </summary>
+      <param name="product">제품</param>
+      <param name="company">회사</param>
+      <param name="ownerCode">소유자 코드</param>
+      <param name="ownerKind">소유자 종류</param>
+      <param name="content">즐겨찾기 내용</param>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.Favorite.#ctor(System.String,System.String,System.String,NSoft.NAccess.ActorKinds,System.String)">
+      <summary>
+            생성자
+            </summary>
+      <param name="productCode">제품</param>
+      <param name="companyCode">회사</param>
+      <param name="ownerCode">소유자 코드</param>
+      <param name="ownerKind">소유자 종류</param>
+      <param name="content">즐겨찾기 내용</param>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Favorite.ProductCode">
+      <summary>
+            제품
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Favorite.CompanyCode">
+      <summary>
+            회사
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Favorite.OwnerCode">
+      <summary>
+            즐겨찾기 소유자 Id (회사|부서|사용자|그룹 의 고유 코드)
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Favorite.OwnerKind">
+      <summary>
+            즐겨찾기 소유자 종류 (회사|부서|사용자|그룹 등)
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Favorite.OwnerName">
+      <summary>
+            소유자 명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Favorite.Content">
+      <summary>
+            즐겨찾기 내용
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Favorite.RegisterCode">
+      <summary>
+            등록자
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Favorite.RegistDate">
+      <summary>
+            등록일
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Favorite.Preference">
+      <summary>
+      </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Favorite.Description">
+      <summary>
+            설명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Favorite.ExAttr">
+      <summary>
+            확장 특성
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Favorite.UpdateTimestamp">
+      <summary>
+            최종 갱신 시각
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.File">
+      <summary>
+            파일 정보
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.File.#ctor(System.String,System.String,NSoft.NAccess.Domain.Model.FileMapping)">
+      <summary>
+            생성자
+            </summary>
+      <param name="category">
+      </param>
+      <param name="filename">
+      </param>
+      <param name="fileMapping">
+      </param>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.File.FileMapping">
+      <summary>
+            파일 매핑 관련 정보
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.File.ResourceKind">
+      <summary>
+            리소스 종류
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.File.ResourceId">
+      <summary>
+            리소스 Id
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.File.OwnerCode">
+      <summary>
+            소유자 Id
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.File.OwnerKind">
+      <summary>
+            소유자 종류
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.File.FileType">
+      <summary>
+            File Content Type (Mime type)
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.File.State">
+      <summary>
+            TODO: 이게 뭘 뜻하는지 모르겠네??? 정확한 의미를 파악해서 기술할 것
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.File.StateId">
+      <summary>
+            TODO: 이게 뭘 뜻하는지 모르겠네??? 정확한 의미를 파악해서 기술할 것
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.File.IsRecentVersion">
+      <summary>
+            최신버전인지 여부
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.File.Version">
+      <summary>
+            파일 버전
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.File.VersionDesc">
+      <summary>
+            파일 버전 설명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.File.FileGroup">
+      <summary>
+            파일 그룹
+            TODO: 이게 뭘 뜻하는지 모르겠네??? 정확한 의미를 파악해서 기술할 것
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.File.FileFloor">
+      <summary>
+            파일 Floor. 
+            TODO: 이게 뭘 뜻하는지 모르겠네??? 정확한 의미를 파악해서 기술할 것
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.File.CreateDate">
+      <summary>
+            생성 일자
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.File.DeleteDate">
+      <summary>
+            삭제 일자 (삭제일자에 값이 존재하고, 현재 날짜보다 값이 작다면 삭제되었다는 뜻이다)
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.File.Description">
+      <summary>
+            설명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.File.ExAttr">
+      <summary>
+            확장 특성
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.File.UpdateTimestamp">
+      <summary>
+            최종 갱신 시각
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.FileMapping">
+      <summary>
+            파일 정보 연계를 위한 정보
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.FileMapping.#ctor(System.String,System.String,System.String)">
+      <summary>
+            생성자
+            </summary>
+      <param name="productCode">제품 코드</param>
+      <param name="systemId">시스템 Id</param>
+      <param name="subId">시스템 Sub Id</param>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.FileMapping.Description">
+      <summary>
+            설명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.FileMapping.ExAttr">
+      <summary>
+            확장 특성
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.FileMapping.UpdateTimestamp">
+      <summary>
+            최종 갱신 시각
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.MasterCode">
+      <summary>
+            마스터 코드 정보
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.MasterCode.#ctor(NSoft.NAccess.Domain.Model.Product,System.String,System.String)">
+      <summary>
+            생성자
+            </summary>
+      <param name="product">소속 제품</param>
+      <param name="code">코드 코드</param>
+      <param name="name">코드 명</param>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.MasterCode.Product">
+      <summary>
+            소속 제품
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.MasterCode.Code">
+      <summary>
+            마스터 코드 코드
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.MasterCode.Name">
+      <summary>
+            마스터 코드 표시명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.MasterCode.IsActive">
+      <summary>
+            사용 여부
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.MasterCode.Description">
+      <summary>
+            설명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.MasterCode.ExAttr">
+      <summary>
+            확장 속성
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.MasterCode.UpdateTimestamp">
+      <summary>
+            최종 갱신일자
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.MasterCode.Items">
+      <summary>
+            마스터 코드 아이템 컬렉션
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.MasterCodeLocale.Name">
+      <summary>
+            마스터 코드 표시명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.MasterCodeLocale.Description">
+      <summary>
+            설명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.MasterCodeLocale.ExAttr">
+      <summary>
+            확장 속성
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.MasterCodeItem">
+      <summary>
+            마스터 코드 아이템
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.MasterCodeItem.MasterCode">
+      <summary>
+            마스터 코드 
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.MasterCodeItem.Code">
+      <summary>
+            아이템 코드
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.MasterCodeItem.Name">
+      <summary>
+            Item 표시명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.MasterCodeItem.Value">
+      <summary>
+            아이템 값
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.MasterCodeItem.ViewOrder">
+      <summary>
+            Item 정렬 순서
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.MasterCodeItem.IsActive">
+      <summary>
+            사용 여부
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.MasterCodeItem.Description">
+      <summary>
+            설명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.MasterCodeItem.ExAttr">
+      <summary>
+            확장 속성
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.MasterCodeItem.UpdateTimestamp">
+      <summary>
+            최종 갱신일
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.MasterCodeItemLocale">
+      <summary>
+        <see cref="T:NSoft.NAccess.Domain.Model.MasterCodeItem" />의 지역화 정보
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.MasterCodeItemLocale.Name">
+      <summary>
+            Item 표시명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.MasterCodeItemLocale.Value">
+      <summary>
+            아이템 값
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.MasterCodeItemLocale.Description">
+      <summary>
+            설명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.MasterCodeItemLocale.ExAttr">
+      <summary>
+            확장 속성
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.Menu">
+      <summary>
+            메뉴 정보
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Menu.Code">
+      <summary>
+            메뉴 고유 코드
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Menu.MenuTemplate">
+      <summary>
+            메뉴 템플릿 
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Menu.IsActive">
+      <summary>
+            사용가능 여부
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Menu.Description">
+      <summary>
+            설명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Menu.ExAttr">
+      <summary>
+            확장 특성
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Menu.UpdateTimestamp">
+      <summary>
+            최종 갱신 시각
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.MenuTemplate">
+      <summary>
+            메뉴 템플릿 정보
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.MenuTemplate.#ctor">
+      <summary>
+            생성자
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.MenuTemplate.#ctor(NSoft.NAccess.Domain.Model.Product,System.String)">
+      <summary>
+            생성자
+            </summary>
+      <param name="product">제품</param>
+      <param name="code">메뉴 템플릿 코드</param>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.MenuTemplate.Product">
+      <summary>
+            제품
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.MenuTemplate.Code">
+      <summary>
+            메뉴 템플릿 코드
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.MenuTemplate.Name">
+      <summary>
+            메뉴 템플릿 명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.MenuTemplate.MenuUrl">
+      <summary>
+            메뉴의 Script Path
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.MenuTemplate.TreePath">
+      <summary>
+            Tree Path of MenuTemplate Code
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.MenuTemplate.Description">
+      <summary>
+            설명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.MenuTemplate.ExAttr">
+      <summary>
+            확장 속성
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.MenuTemplate.UpdateTimestamp">
+      <summary>
+            최종 갱신 시각
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.MenuTemplateLocale">
+      <summary>
+            메뉴 템플릿 지역화 정보
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.MenuTemplateLocale.Name">
+      <summary>
+            메뉴 템플릿 명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.MenuTemplateLocale.MenuUrl">
+      <summary>
+            메뉴의 Script Path
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.MenuTemplateLocale.Description">
+      <summary>
+            설명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.MenuTemplateLocale.ExAttr">
+      <summary>
+            확장 속성
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.Product">
+      <summary>
+            제품 (Product) 정보
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.Product.#ctor(System.String,System.String,System.Boolean)">
+      <summary>
+            생성자
+            </summary>
+      <param name="code">제품 코드</param>
+      <param name="name">제품 명</param>
+      <param name="isActive">활성화 여부</param>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Product.Code">
+      <summary>
+            제품 코드 (고유한 값이어야 한다)
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Product.Name">
+      <summary>
+            제품 명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Product.AbbrName">
+      <summary>
+            제품 축약 명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Product.IsActive">
+      <summary>
+            사용 여부
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Product.Description">
+      <summary>
+            Description
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Product.ExAttr">
+      <summary>
+            확장 특성
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Product.UpdateTimestamp">
+      <summary>
+            최종 갱신일
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.ProductLocale">
+      <summary>
+            제품 지역화 정보
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.ProductLocale.Name">
+      <summary>
+            Name
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.ProductLocale.Description">
+      <summary>
+            Description
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.ProductLocale.ExAttr">
+      <summary>
+            확장 특성
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.Resource">
+      <summary>
+            리소스 종류 정보
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.Resource.#ctor">
+      <summary>
+            생성자
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.Resource.#ctor(System.String,System.String)">
+      <summary>
+            생성자
+            </summary>
+      <param name="productCode">리소스를 정의한 제품 코드</param>
+      <param name="code">리소스 코드</param>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Resource.ProductCode">
+      <summary>
+            제품 코드
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Resource.Code">
+      <summary>
+            리소스 코드
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Resource.Name">
+      <summary>
+            리소스 명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Resource.Description">
+      <summary>
+            설명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Resource.ExAttr">
+      <summary>
+            확장 속성
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.Resource.UpdateTimestamp">
+      <summary>
+            최종갱신일
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.ResourceLocale.Name">
+      <summary>
+            리소스 명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.ResourceLocale.Description">
+      <summary>
+            설명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.ResourceLocale.ExAttr">
+      <summary>
+            확장 속성
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.ResourceActor">
+      <summary>
+            리소스에 대한 사용자의 접근 권한 정보
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.ResourceActor.#ctor">
+      <summary>
+            생성자
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.ResourceActor.#ctor(NSoft.NAccess.Domain.Model.Resource,System.String,System.String,System.String,NSoft.NAccess.ActorKinds,NSoft.NAccess.AuthorityKinds)">
+      <summary>
+            생성자
+            </summary>
+      <param name="resource">리소스 종류 정보</param>
+      <param name="resourceInstanceId">리소스 인스턴스의 Id</param>
+      <param name="companyCode">회사</param>
+      <param name="actorCode">접근자 Id (회사,부서,그룹,사용자)</param>
+      <param name="actorKind">접근자 종류</param>
+      <param name="authorityKind">접근 권한 종류</param>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.ResourceActor.#ctor(System.String,System.String,System.String,System.String,System.String,NSoft.NAccess.ActorKinds,NSoft.NAccess.AuthorityKinds)">
+      <summary>
+            생성자
+            </summary>
+      <param name="productCode">제품 코드</param>
+      <param name="resourceCode">리소스 종류 코드</param>
+      <param name="resourceInstanceId">리소스 인스턴스의 Id</param>
+      <param name="companyCode">회사</param>
+      <param name="actorCode">접근자 Id (회사,부서,그룹,사용자)</param>
+      <param name="actorKind">접근자 종류</param>
+      <param name="authorityKind">접근 권한 종류</param>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.ResourceActor.#ctor(NSoft.NAccess.Domain.Model.ResourceActorIdentity,NSoft.NAccess.AuthorityKinds)">
+      <summary>
+            생성자
+            </summary>
+      <param name="identity">ResourceActor의 composite-id</param>
+      <param name="authorityKind">접근 권한 종류</param>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.ResourceActor.AuthorityKind">
+      <summary>
+            접근 권한 종류 (읽기|쓰기|삭제 등)
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.ResourceActor.ExAttr">
+      <summary>
+            확장 속성 정보
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.ResourceActor.UpdateTimestamp">
+      <summary>
+            최종 갱신 시각
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.ResourceActorIdentity">
+      <summary>
+            Composite Id of <see cref="T:NSoft.NAccess.Domain.Model.ResourceActor" /></summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.ResourceActorIdentity.#ctor(System.String,System.String,System.String,System.String,System.String,NSoft.NAccess.ActorKinds)">
+      <summary>
+            생성자
+            </summary>
+      <param name="productCode">제품 코드</param>
+      <param name="resourceCode">리소스 종류 코드</param>
+      <param name="resourceInstanceId">리소스 인스턴스의 Id</param>
+      <param name="companyCode">회사 코드</param>
+      <param name="actorCode">접근자 Id (회사,부서,그룹,사용자)</param>
+      <param name="actorKind">접근자 종류</param>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.ResourceActorIdentity.ProductCode">
+      <summary>
+            제품 코드
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.ResourceActorIdentity.ResourceCode">
+      <summary>
+            리소스 종류 코드
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.ResourceActorIdentity.ResourceInstanceId">
+      <summary>
+            리소스 인스턴스의 ID 값(접근 대상) 
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.ResourceActorIdentity.CompanyCode">
+      <summary>
+            회사 
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.ResourceActorIdentity.ActorCode">
+      <summary>
+            Actor Code (접근자 코드 : 회사|부서|그룹|사용자 코드)
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.ResourceActorIdentity.ActorKind">
+      <summary>
+            접근자 종류 (부서|사용자|그룹 등)
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.UserConfig">
+      <summary>
+            사용자 환경 설정 정보
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.UserConfig.#ctor(System.String,System.String,System.String,System.String,System.String)">
+      <summary>
+            생성자
+            </summary>
+      <param name="productCode">제품 코드</param>
+      <param name="companyCode">사용자 소속 회사 코드</param>
+      <param name="userCode">사용자 코드</param>
+      <param name="key">설정 키</param>
+      <param name="value">설정 값</param>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.UserConfig.#ctor(NSoft.NAccess.Domain.Model.UserConfigIdentity,System.String)">
+      <summary>
+            생성자
+            </summary>
+      <param name="identity">Identity</param>
+      <param name="value">설정 값</param>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.UserConfig.Value">
+      <summary>
+            사용자 설정 값
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.UserConfig.DefaultValue">
+      <summary>
+            기본 값
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.UserConfig.Description">
+      <summary>
+            설명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.UserConfig.ExAttr">
+      <summary>
+            확장속성
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.UserConfig.UpdateTimestamp">
+      <summary>
+            최종 갱신일
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.UserConfigIdentity">
+      <summary>
+            Identity of <see cref="T:NSoft.NAccess.Domain.Model.UserConfig" /></summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.UserConfigIdentity.#ctor(System.String,System.String,System.String,System.String)">
+      <summary>
+            생성자
+            </summary>
+      <param name="productCode">제품 코드</param>
+      <param name="companyCode">사용자 소속 회사 코드</param>
+      <param name="userCode">사용자 코드</param>
+      <param name="key">설정 키</param>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.UserConfigIdentity.ProductCode">
+      <summary>
+            사용자 설정이 적용된 제품 코드
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.UserConfigIdentity.CompanyCode">
+      <summary>
+            회사 코드
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.UserConfigIdentity.UserCode">
+      <summary>
+            사용자 코드
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.UserConfigIdentity.Key">
+      <summary>
+            설정 키
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.UserLoginLog">
+      <summary>
+            사용자 시스템 로그인 이력
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Model.UserLoginLog.#ctor(System.String,System.String,System.String,System.String,System.Nullable{System.DateTime})">
+      <summary>
+            생성자
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.UserLoginLog.ProductCode">
+      <summary>
+            제품 코드
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.UserLoginLog.CompanyCode">
+      <summary>
+            회사 코드
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.UserLoginLog.DepartmentCode">
+      <summary>
+            부서 코드 (겸직일 경우)
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.UserLoginLog.UserCode">
+      <summary>
+            사용자 코드
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.UserLoginLog.LoginId">
+      <summary>
+            로그인 Id (사용자 코드가 아니다) <see cref="P:NSoft.NAccess.Domain.Model.User.LoginId" /></summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.UserLoginLog.LoginTime">
+      <summary>
+            로그인 시각
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.UserLoginLog.LocaleKey">
+      <summary>
+            로그인 시 지역화 키 (예: ko-KR, en-US 등)
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.UserLoginLog.ProductName">
+      <summary>
+            로그인한 제품의 이름
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.UserLoginLog.CompanyName">
+      <summary>
+            사용자 소속 회사 명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.UserLoginLog.DepartmentName">
+      <summary>
+            사용자 소속 부서 명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.UserLoginLog.UserName">
+      <summary>
+            로그인 사용자 명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.UserLoginLog.ExAttr">
+      <summary>
+            확장 속성
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Model.ICompany">
+      <summary>
+            Interface of Company
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.ICompany.Code">
+      <summary>
+            회사 코드
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.ICompany.Name">
+      <summary>
+            회사 명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.ICompany.IsActive">
+      <summary>
+            사용 여부
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.ICompany.Description">
+      <summary>
+            설명
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Model.ICompany.ExAttr">
+      <summary>
+            확장 속성
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Repositories.CalendarRepository">
+      <summary>
+            Calendar 정보 관련 Domain Service
+            </summary>
+      <summary>
+            Calendar Domain Service 중에 WorkTimeByDay 에 대한 서비스
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Repositories.NAccessRepositoryBase">
+      <summary>
+            RealAdmin Domain Service의 최상의 추상 클래스
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.NAccessRepositoryBase.DeleteEntityTransactional(NSoft.NFramework.Data.IDataObject)">
+      <summary>
+            삭제 시 Transaction을 이용한다.
+            </summary>
+      <param name="entity">삭제하고자 하는 entity</param>
+      <exception cref="T:System.InvalidOperationException">삭제하고자 하는 엔티티가 null일 경우</exception>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Repositories.NAccessRepositoryBase.Session">
+      <summary>
+            UnitOfWork에서 활성화된 NHibernate <see cref="T:NHibernate.ISession" /></summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Repositories.NAccessRepositoryBase.SessionImpl">
+      <summary>
+            UnitOfWork에서 활성화된 NHibernate <see cref="T:NHibernate.Engine.ISessionImplementor" /></summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Repositories.NAccessRepositoryBase.SessionFactory">
+      <summary>
+            현재 활성화된 UnitOfWork의 <see cref="P:NSoft.NAccess.Domain.Repositories.NAccessRepositoryBase.SessionFactory" /></summary>
+    </member>
+    <member name="P:NSoft.NAccess.Domain.Repositories.NAccessRepositoryBase.SessionFactoryImplementor">
+      <summary>
+            현재 활성화된 UnitOfWork의 <see cref="P:NSoft.NAccess.Domain.Repositories.NAccessRepositoryBase.SessionFactoryImplementor" /></summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.CalendarRepository.BuildQueryOverOfCalendar(System.String,System.String,System.String,NSoft.NAccess.Domain.Model.Company,System.String)">
+      <summary>
+        <see cref="T:NSoft.NAccess.Domain.Model.Calendar" /> 조회를 위한 Criteria를 빌드합니다.
+            </summary>
+      <param name="code">Calendar 고유 코드</param>
+      <param name="projectId">관련 Proejct의 고유 ID</param>
+      <param name="resourceId">관련 리소스의 고유 ID</param>
+      <param name="company">Calendar 적용 회사</param>
+      <param name="name">Calendar 명</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.CalendarRepository.BuildCriteriaOfCalendar(System.String,System.String,System.String,NSoft.NAccess.Domain.Model.Company,System.String)">
+      <summary>
+        <see cref="T:NSoft.NAccess.Domain.Model.Calendar" /> 조회를 위한 Criteria를 빌드합니다.
+            </summary>
+      <param name="code">Calendar 고유 코드</param>
+      <param name="projectId">관련 Proejct의 고유 ID</param>
+      <param name="resourceId">관련 리소스의 고유 ID</param>
+      <param name="company">Calendar 적용 회사</param>
+      <param name="name">Calendar 명</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.CalendarRepository.ExistsCalendar(System.String,System.String)">
+      <summary>
+            해당하는 Calendar가 존재하는가?
+            </summary>
+      <param name="code">Calendar 고유 코드</param>
+      <param name="projectId">관련 Proejct의 고유 ID</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.CalendarRepository.GetOrCreateCalendar(System.String,System.String)">
+      <summary>
+            지정한 Id에 해당하는 Calendar를 
+            </summary>
+      <param name="code">Calendar 고유 코드 값</param>
+      <param name="projectId">Project Id</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.CalendarRepository.FindOneCalendarByCode(System.String,System.String)">
+      <summary>
+            지정된 Id를 가지는 유일한 Calenar를 반환한다.
+            </summary>
+      <param name="code">Calendar 고유 코드</param>
+      <param name="projectId">관련 Proejct의 고유 ID</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.CalendarRepository.FindOneStandardCalendar">
+      <summary>
+            표준 Calendar 정보를 로드합니다.
+            </summary>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.CalendarRepository.FindOneProjectCalendar(System.String)">
+      <summary>
+            프로젝트용 Calendar 정보를 로드합니다.
+            </summary>
+      <param name="projectId">관련 Proejct의 고유 ID</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.CalendarRepository.FindOneResourceCalendar(System.String)">
+      <summary>
+            리소스용 Calendar 정보를 로드합니다.
+            </summary>
+      <param name="resourceId">관련 리소스의 고유 ID</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.CalendarRepository.FindOneResourceProjectCalendar(System.String,System.String)">
+      <summary>
+            리소스 프로젝트 Calendar 정보를 로드합니다.
+            </summary>
+      <param name="resourceId">관련 리소스의 고유 ID</param>
+      <param name="projectId">관련 Proejct의 고유 ID</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.CalendarRepository.AddCalendarRule(NSoft.NAccess.Domain.Model.Calendar,NSoft.NAccess.Domain.Model.CalendarRule)">
+      <summary>
+        <paramref name="calendar" />의 Rules 컬렉션에 <paramref name="rule" />을 추가합니다.
+            </summary>
+      <param name="calendar">
+      </param>
+      <param name="rule">
+      </param>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.CalendarRepository.CreateCalendarRule(NSoft.NAccess.Domain.Model.Calendar,System.String)">
+      <summary>
+            특정 Calendar에 CalendarRule을 새로 만든다.
+            </summary>
+      <param name="calendar">규칙이 적용될 <see cref="T:NSoft.NAccess.Domain.Model.Calendar" /></param>
+      <param name="name">규칙 명</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.CalendarRepository.CreateCalendarRule(NSoft.NAccess.Domain.Model.Calendar,System.String,System.DayOfWeek,System.Nullable{System.Int32},NSoft.NFramework.TimePeriods.ITimePeriod)">
+      <summary>
+            특정 Calendar에 CalendarRule을 새로 만든다.
+            </summary>
+      <param name="calendar">
+      </param>
+      <param name="name">
+      </param>
+      <param name="dayOfWeek">
+      </param>
+      <param name="isWorking">
+      </param>
+      <param name="timePeriod">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.CalendarRepository.CreateHolyDayCalendarRule(NSoft.NAccess.Domain.Model.Calendar,System.DateTime)">
+      <summary>
+            특정 날짜를 공휴일로 지정하는 룰을 만듭니다. 
+            </summary>
+      <param name="calendar">
+      </param>
+      <param name="holyday">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.CalendarRepository.FindAllCalendarRule(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.CalendarRule}[])">
+      <summary>
+            특정 Project, 특정 Calendar와 관련된 CalendarRule 목록을 로드합니다.
+            </summary>
+      <param name="calendarCode">Calendar 고유 코드</param>
+      <param name="projectId">관련 Proejct의 고유 ID</param>
+      <param name="firstResult">첫번째 결과 셋의 인덱스 (0부터 시작. null이면 0으로 간주)</param>
+      <param name="maxResults">결과 셋의 최대 레코드 수 (null 또는 0 이하의 값은 무시된다)</param>
+      <param name="orders">정렬 순서</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.CalendarRepository.FindAllCalendarRule(System.String,System.String)">
+      <summary>
+            특정 Project, 특정 Calendar와 관련된 CalendarRule 목록을 로드합니다.
+            </summary>
+      <param name="calendarCode">Calendar 고유 코드</param>
+      <param name="projectId">관련 Proejct의 고유 ID</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.CalendarRepository.ClearCalendarRulesOf(NSoft.NAccess.Domain.Model.Calendar)">
+      <summary>
+            지정된 Calendar에 속한 모든 Calendar Rule을 삭제합니다.
+            </summary>
+      <param name="calendar">
+      </param>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.CalendarRepository.BuildQueryOverOfWorkTimeByDay(System.String,System.Nullable{System.DateTime},NSoft.NFramework.TimePeriods.ITimePeriod,System.Nullable{System.Boolean})">
+      <summary>
+        <see cref="T:NSoft.NAccess.Domain.Model.WorkTimeByDay" /> 정보를 조회하기 위해 Criteria를 빌드합니다.
+            </summary>
+      <param name="calendarCode">
+      </param>
+      <param name="workDay">
+      </param>
+      <param name="workPeriod">
+      </param>
+      <param name="isWork">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.CalendarRepository.BuildCriteriaOfWorkTimeByDay(System.String,System.Nullable{System.DateTime},NSoft.NFramework.TimePeriods.ITimePeriod,System.Nullable{System.Boolean})">
+      <summary>
+        <see cref="T:NSoft.NAccess.Domain.Model.WorkTimeByDay" /> 정보를 조회하기 위해 Criteria를 빌드합니다.
+            </summary>
+      <param name="calendarCode">
+      </param>
+      <param name="workDay">
+      </param>
+      <param name="workPeriod">
+      </param>
+      <param name="isWork">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.CalendarRepository.FindOneWorkTimeByDayByWorkDay(NSoft.NAccess.Domain.Model.Calendar,System.DateTime)">
+      <summary>
+            지정한 날짜의 WorkTimeByDay 정보를 로드합니다.
+            </summary>
+      <param name="calendar">DayCalendar가 속한 Calendar 정보</param>
+      <param name="workDay">검색할 날짜</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.CalendarRepository.FindAllWorkTimeByDayInRange(System.String,NSoft.NFramework.TimePeriods.ITimePeriod,System.Nullable{System.Int32},System.Nullable{System.Int32},NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.WorkTimeByDay}[])">
+      <summary>
+            특정 Calendar의 지정된 범위의 <see cref="T:NSoft.NAccess.Domain.Model.WorkTimeByDay" /> 목록을 가져옵니다.
+            </summary>
+      <param name="calendarCode">WorkTime 산출의 기준이 된 Calendar의 코드값 (null이면 안된다)</param>
+      <param name="searchPeriod">검색 기간 (null이거나 기간이 비었으면 모든 기간을 가져온다)</param>
+      <param name="firstResult">첫번째 결과 셋의 인덱스 (0부터 시작. null이면 0으로 간주)</param>
+      <param name="maxResults">결과 셋의 최대 레코드 수 (null 또는 0 이하의 값은 무시된다)</param>
+      <param name="orders">정렬 순서</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.CalendarRepository.FindAllWorkTimeByDayInRange(NSoft.NFramework.TimePeriods.ITimePeriod)">
+      <summary>
+            지정된 기간의 <see cref="T:NSoft.NAccess.Domain.Model.WorkTimeByDay" /> 목록을 가져옵니다.
+            </summary>
+      <param name="searchPeriod">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.CalendarRepository.GetPageOfWorkTimeByDayInRange(System.String,NSoft.NFramework.TimePeriods.ITimePeriod,System.Int32,System.Int32,NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.WorkTimeByDay}[])">
+      <summary>
+            지정한 기간의 WorkTimeByDay 정보를 Paging처리해서 로드합니다
+            </summary>
+      <param name="calendarCode">WorkTime 산출의 기준이 된 Calendar의 코드값 (null이면 안된다)</param>
+      <param name="searchPeriod">검색 기간 (null이거나 기간이 비었으면 모든 기간을 가져온다)</param>
+      <param name="pageIndex">Page Index (0부터 시작합니다.)</param>
+      <param name="pageSize">Page Size (보통 10입니다. 0보다 커야 합니다.)</param>
+      <param name="orders">정렬 순서</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Repositories.LoggingRepository">
+      <summary>
+            시스템 사용에 대한 로그 서비스
+            </summary>
+      <summary>
+            사용자 로그인 이력 
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.LoggingRepository.BuildQueryOverOfUserLoginLog(System.String,System.String,System.String,System.String,NSoft.NFramework.TimePeriods.ITimePeriod)">
+      <summary>
+            사용자 로그인 이력을 조회하기 위한 Criteria를 빌드합니다.
+            </summary>
+      <param name="productCode">제품 코드</param>
+      <param name="companyCode">회사 코드</param>
+      <param name="loginId">로그인 ID (사용자 코드가 아니다)</param>
+      <param name="localeKey">지역화 정보 (<see cref="P:System.Globalization.CultureInfo.Name" />)</param>
+      <param name="loginTimePeriod">로그인 시간의 검색 범위</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.LoggingRepository.BuildCriteriaOfUserLoginLog(System.String,System.String,System.String,System.String,NSoft.NFramework.TimePeriods.ITimePeriod)">
+      <summary>
+            사용자 로그인 이력을 조회하기 위한 Criteria를 빌드합니다.
+            </summary>
+      <param name="productCode">제품 코드</param>
+      <param name="companyCode">회사 코드</param>
+      <param name="loginId">로그인 ID (사용자 코드가 아니다)</param>
+      <param name="localeKey">지역화 정보 (<see cref="P:System.Globalization.CultureInfo.Name" />)</param>
+      <param name="loginTimePeriod">로그인 시간의 검색 범위</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.LoggingRepository.FindAllUserLoginLog(System.String,System.String,System.String,System.String,NSoft.NFramework.TimePeriods.ITimePeriod,System.Nullable{System.Int32},System.Nullable{System.Int32},NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.UserLoginLog}[])">
+      <summary>
+            사용자 로그인 이력 정보를 조회합니다.
+            </summary>
+      <param name="productCode">제품 코드</param>
+      <param name="companyCode">회사 코드</param>
+      <param name="loginId">로그인 ID (사용자 코드가 아니다)</param>
+      <param name="localeKey">지역화 정보 (<see cref="P:System.Globalization.CultureInfo.Name" />)</param>
+      <param name="loginTimePeriod">로그인 시간의 검색 범위</param>
+      <param name="firstResult">첫번째 결과 셋의 인덱스 (0부터 시작. null이면 0으로 간주)</param>
+      <param name="maxResults">결과 셋의 최대 레코드 수 (null 또는 0 이하의 값은 무시된다)</param>
+      <param name="orders">정렬 순서 (보통 LoginTime DESC 이다)</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.LoggingRepository.GetPageOfUserLoginLog(System.String,System.String,System.String,System.String,NSoft.NFramework.TimePeriods.ITimePeriod,System.Int32,System.Int32,NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.UserLoginLog}[])">
+      <summary>
+            사용자 로그인 이력 정보를 Paging 조회를 수행합니다.
+            </summary>
+      <param name="productCode">제품 코드</param>
+      <param name="companyCode">회사 코드</param>
+      <param name="loginId">로그인 ID (사용자 코드가 아니다)</param>
+      <param name="localeKey">지역화 정보 (<see cref="P:System.Globalization.CultureInfo.Name" />)</param>
+      <param name="loginTimePeriod">로그인 시간의 검색 범위</param>
+      <param name="pageIndex">Page Index (0부터 시작합니다)</param>
+      <param name="pageSize">Page Size (한 페이지의 요소의 수. 보통 10개)</param>
+      <param name="orders">정렬 순서 (보통 LoginTime DESC 이다)</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.LoggingRepository.GetPageOfUserLoginLog(System.String,System.String,System.Int32,System.Int32,NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.UserLoginLog}[])">
+      <summary>
+            사용자 로그인 이력 정보를 Paging 조회를 수행합니다.
+            </summary>
+      <param name="productCode">제품 코드</param>
+      <param name="companyCode">회사 코드</param>
+      <param name="pageIndex">Page Index (0부터 시작합니다)</param>
+      <param name="pageSize">Page Size (한 페이지의 요소의 수. 보통 10개)</param>
+      <param name="orders">정렬 순서 (보통 LoginTime DESC 이다)</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.LoggingRepository.InsertUserLoginLog(NSoft.NAccess.Domain.Model.Product,NSoft.NAccess.Domain.Model.User,NSoft.NAccess.Domain.Model.Department,System.String,System.Nullable{System.DateTime},System.String)">
+      <summary>
+            사용자 Login 이력을 DB에 기록합니다. (Sessionless를 사용하므로 함수명이 Insert 로 시작합니다)
+            </summary>
+      <param name="product">로그인한 제품 정보</param>
+      <param name="user">로그인 사용자</param>
+      <param name="department">로그인 사용자의 부서</param>
+      <param name="localeKey">로그인 사용자의 Locale 정보</param>
+      <param name="loginTime">로그인 시각</param>
+      <param name="exAttr">확장 속성 정보</param>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.LoggingRepository.InsertUserLoginLog(NSoft.NAccess.Domain.Model.Product,NSoft.NAccess.Domain.Model.User,System.String,System.Nullable{System.DateTime},System.String)">
+      <summary>
+            사용자 Login 이력을 DB에 기록합니다. (Sessionless를 사용하므로 함수명이 Insert 로 시작합니다)
+            </summary>
+      <param name="product">로그인한 제품 정보</param>
+      <param name="user">로그인 사용자</param>
+      <param name="localeKey">로그인 사용자의 Locale 정보</param>
+      <param name="loginTime">로그인 시각</param>
+      <param name="exAttr">확장 속성 정보</param>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.LoggingRepository.InsertUserLoginLog(System.String,System.String,System.String,System.String,System.Nullable{System.DateTime})">
+      <summary>
+            사용자 Login 이력을 DB에 기록합니다. (Sessionless를 사용하므로 함수명이 Insert 로 시작합니다)
+            </summary>
+      <param name="productCode">제품 코드</param>
+      <param name="companyCode">사용자 소속 회사 코드</param>
+      <param name="loginId">로그인 Id</param>
+      <param name="localeKey">로그인 사용자의 Locale 정보</param>
+      <param name="loginTime">로그인 시각</param>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Repositories.OrganizationRepository">
+      <summary>
+            코드 정보 서비스
+            </summary>
+      <summary>
+            Company 관련 Domain Service
+            </summary>
+      <summary>
+            조직 정보 관련 Domain Service
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.BuildQueryOverOfCode(System.String,System.String,System.String,System.String,System.String,System.Nullable{System.Boolean})">
+      <summary>
+        <see cref="T:NSoft.NAccess.Domain.Model.Code" /> 정보를 조회하기 위한 Criteria를 빌드합니다.
+            </summary>
+      <param name="companyCode">회사 코드</param>
+      <param name="groupCode">코드 그룹 코드</param>
+      <param name="itemCode">코드 아이템 코드</param>
+      <param name="groupName">코드 그룹 명</param>
+      <param name="itemName">코드 아이템 명</param>
+      <param name="isActive">Is Active?</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.BuildCriteriaOfCode(System.String,System.String,System.String,System.String,System.String,System.Nullable{System.Boolean})">
+      <summary>
+        <see cref="T:NSoft.NAccess.Domain.Model.Code" /> 정보를 조회하기 위한 Criteria를 빌드합니다.
+            </summary>
+      <param name="companyCode">회사 코드</param>
+      <param name="groupCode">코드 그룹 코드</param>
+      <param name="itemCode">코드 아이템 코드</param>
+      <param name="groupName">코드 그룹 명</param>
+      <param name="itemName">코드 아이템 명</param>
+      <param name="isActive">Is Active?</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.GetOrCreateCode(NSoft.NAccess.Domain.Model.Company,System.String,System.String)">
+      <summary>
+            지정된 코드를 조회한다. 없다면, 새로 생성하여 저장한 후, 반환한다.
+            </summary>
+      <param name="company">회사</param>
+      <param name="groupCode">그룹 코드</param>
+      <param name="itemCode">아이템 코드</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.GetOrCreateCode(System.String,System.String,System.String)">
+      <summary>
+            지정된 코드를 조회한다. 없다면, 새로 생성하여 저장한 후, 반환한다.
+            </summary>
+      <param name="companyCode">회사</param>
+      <param name="groupCode">그룹 코드</param>
+      <param name="itemCode">아이템 코드</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindOneCodeByCode(System.String,System.String,System.String)">
+      <summary>
+            코드 Identity 값으로부터 코드 정보를 조회합니다.
+            </summary>
+      <param name="companyCode">회사 콛ㅡ</param>
+      <param name="groupCode">그룹 코드</param>
+      <param name="itemCode">아이템 코드</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindOneCodeByCode(NSoft.NAccess.Domain.Model.Company,System.String,System.String)">
+      <summary>
+            코드 Identity 값으로부터 코드 정보를 조회합니다.
+            </summary>
+      <param name="company">회사</param>
+      <param name="groupCode">그룹 코드</param>
+      <param name="itemCode">아이템 코드</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindAllCodeGroupByCompany(System.String)">
+      <summary>
+            지정된 회사의 코드 그룹 정보를 가져온다.
+            </summary>
+      <param name="companyCode">회사 코드</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindAllCodeGroupByCompany(NSoft.NAccess.Domain.Model.Company)">
+      <summary>
+            지정된 회사의 코드 그룹 정보를 가져온다.
+            </summary>
+      <param name="company">회사</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindAllCodeByCompany(NSoft.NAccess.Domain.Model.Company,System.Nullable{System.Int32},System.Nullable{System.Int32},NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.Code}[])">
+      <summary>
+            특정 회사의 모든 코드 정보를 조회합니다.
+            </summary>
+      <param name="company">회사</param>
+      <param name="firstResult">첫번째 결과 셋의 인덱스 (0부터 시작. null이면 0으로 간주)</param>
+      <param name="maxResults">결과 셋의 최대 레코드 수 (null 또는 0 이하의 값은 무시된다)</param>
+      <param name="orders">정렬 순서</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindAllCodeByCompany(NSoft.NAccess.Domain.Model.Company)">
+      <summary>
+            특정 회사의 모든 코드 정보를 조회합니다.
+            </summary>
+      <param name="company">회사</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindAllCodeByGroup(NSoft.NAccess.Domain.Model.Company,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.Code}[])">
+      <summary>
+            지정한 코드 그룹의 코드 정보들을 조회합니다.
+            </summary>
+      <param name="company">회사</param>
+      <param name="groupCode">그룹 코드</param>
+      <param name="firstResult">첫번째 결과 셋의 인덱스 (0부터 시작. null이면 0으로 간주)</param>
+      <param name="maxResults">결과 셋의 최대 레코드 수 (null 또는 0 이하의 값은 무시된다)</param>
+      <param name="orders">정렬 순서</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindAllCodeByGroup(NSoft.NAccess.Domain.Model.Company,System.String)">
+      <summary>
+            지정한 코드 그룹의 코드 정보들을 조회합니다.
+            </summary>
+      <param name="company">회사</param>
+      <param name="groupCode">그룹 코드</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindAllCodeByGroupNameToMatch(System.String,System.String,NHibernate.Criterion.MatchMode,System.Nullable{System.Int32},System.Nullable{System.Int32},NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.Code}[])">
+      <summary>
+            지정한 코드 그룹명에 매칭되는 모든 코드 정보를 조회합니다.
+            </summary>
+      <param name="companyCode">회사</param>
+      <param name="groupNameToMatch">검색할 코드 그룹명</param>
+      <param name="matchMode">매칭 모드</param>
+      <param name="firstResult">첫번째 결과 셋의 인덱스 (0부터 시작. null이면 0으로 간주)</param>
+      <param name="maxResults">결과 셋의 최대 레코드 수 (null 또는 0 이하의 값은 무시된다)</param>
+      <param name="orders">정렬 순서</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindAllCodeByItemNameToMatch(System.String,System.String,NHibernate.Criterion.MatchMode,System.Nullable{System.Int32},System.Nullable{System.Int32},NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.Code}[])">
+      <summary>
+            지정된 아이템 이름과 매칭되는 모든 코드 정보를 조회합니다.
+            </summary>
+      <param name="companyCode">회사</param>
+      <param name="itemNameToMatch">검색할 코드 아이템 명</param>
+      <param name="matchMode">매칭 모드</param>
+      <param name="firstResult">첫번째 결과 셋의 인덱스 (0부터 시작. null이면 0으로 간주)</param>
+      <param name="maxResults">결과 셋의 최대 레코드 수 (null 또는 0 이하의 값은 무시된다)</param>
+      <param name="orders">정렬 순서</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.DeleteCode(NSoft.NAccess.Domain.Model.Code)">
+      <summary>
+            지정한 코드 정보를 삭제합니다.
+            </summary>
+      <param name="code">삭제할 코드</param>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.DeleteAllCodeByGroup(System.String,System.String)">
+      <summary>
+            지정된 코드 그룹의 모든 코드정보를 삭제합니다.
+            </summary>
+      <param name="companyCode">회사 코드</param>
+      <param name="groupCode">그룹 코드</param>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.BuildQueryOverOfCompany(System.String,System.String,System.Nullable{System.Boolean})">
+      <summary>
+            Company 조회를 위한 QueryOver를 빌드합니다.
+            </summary>
+      <param name="code">회사 코드</param>
+      <param name="name">회사 명</param>
+      <param name="isActive">활성화 여부</param>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.BuildCriteriaOfCompany(System.String,System.String,System.Nullable{System.Boolean})">
+      <summary>
+            Company 조회를 위한 Criteria를 빌드합니다.
+            </summary>
+      <param name="code">회사 코드</param>
+      <param name="name">회사 명</param>
+      <param name="isActive">활성화 여부</param>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.GetOrCreateComapny(System.String)">
+      <summary>
+            지정된 회사 코드를 가진 Company 정보를 로드합니다. 없으면, 새로 만들어서 저장 후, 반환합니다.
+            </summary>
+      <param name="code">회사 코드</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindOneCompanyByCode(System.String)">
+      <summary>
+            지정한 코드를 가지는 회사를 찾습니다.
+            </summary>
+      <param name="code">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindOneCompanyByName(System.String)">
+      <summary>
+            Company Name으로 조회하기
+            </summary>
+      <param name="name">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindAllActiveCompany">
+      <summary>
+            사용가능한 모든 Company 정보를 가져옵니다.
+            </summary>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.DeleteCompany(NSoft.NAccess.Domain.Model.Company)">
+      <summary>
+            지정한 Company 정보를 삭제합니다.
+            </summary>
+      <param name="company">
+      </param>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.#ctor">
+      <summary>
+            생성자
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.BuildQueryOverOfDepartment(System.String,System.String,System.String,System.String)">
+      <summary>
+            부서 (<see cref="T:NSoft.NAccess.Domain.Model.Department" />) 정보를 조회하기 위한 QueryOver를 빌드합니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.BuildCriteriaOfDepartment(System.String,System.String,System.String,System.String)">
+      <summary>
+            부서 (<see cref="T:NSoft.NAccess.Domain.Model.Department" />) 정보를 조회하기 위한 Criteria를 빌드합니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.BuildCriteriaOfDepartment(NSoft.NAccess.Domain.Model.Company,System.String,System.String,NSoft.NAccess.Domain.Model.Department)">
+      <summary>
+            부서 (<see cref="T:NSoft.NAccess.Domain.Model.Department" />) 정보를 조회하기 위한 Criteria를 빌드합니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.GetOrCreateDepartment(NSoft.NAccess.Domain.Model.Company,System.String)">
+      <summary>
+            지정된 부서 Id를 가진 부서 정보를 로드한다. 만약 없다면 새로 생성하여 저장한 후 로드한다.
+            </summary>
+      <param name="company">소속 회사</param>
+      <param name="code">부서 코드</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.CreateDepartmentOf(NSoft.NAccess.Domain.Model.Department,System.String)">
+      <summary>
+            지정된 상위 부서 밑으로 부서를 추가합니다. 이때, 상위부서는 null이면 안됩니다. (최상위 부서는 <see cref="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.GetOrCreateDepartment(NSoft.NAccess.Domain.Model.Company,System.String)" /> 메소드를 사용하세요)
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.ChangeDepartmentParent(NSoft.NAccess.Domain.Model.Department,NSoft.NAccess.Domain.Model.Department)">
+      <summary>
+            지정된 child 부서를 newParent의 하위부서로 이동시킨다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindOneDepartmentByCode(System.String,System.String)">
+      <summary>
+            지정된 회사의 부서 코드에 해당하는 부서정보를 로드합니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindOneDepartmentByCode(NSoft.NAccess.Domain.Model.Company,System.String)">
+      <summary>
+            지정된 회사의 부서 코드에 해당하는 부서정보를 로드합니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindRootDepartmentByCompany(NSoft.NAccess.Domain.Model.Company)">
+      <summary>
+            최상위 부서들의 정보를 조회한다.
+            </summary>
+      <param name="company">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindAllDepartmentByCompany(NSoft.NAccess.Domain.Model.Company,System.Nullable{System.Int32},System.Nullable{System.Int32},NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.Department}[])">
+      <summary>
+            지정된 회사의 모든 부서 정보를 조회합니다.
+            </summary>
+      <param name="company">회사</param>
+      <param name="firstResult">첫번째 결과 셋의 인덱스 (0부터 시작. null이면 0으로 간주)</param>
+      <param name="maxResults">결과 셋의 최대 레코드 수 (null 또는 0 이하의 값은 무시된다)</param>
+      <param name="orders">정렬 순서</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindAllDepartmentByCompany(NSoft.NAccess.Domain.Model.Company)">
+      <summary>
+            지정된 회사의 모든 부서 정보를 조회합니다.
+            </summary>
+      <param name="company">회사</param>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindAllDepartmentByNameToMatch(NSoft.NAccess.Domain.Model.Company,System.String,NHibernate.Criterion.MatchMode,System.Nullable{System.Int32},System.Nullable{System.Int32},NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.Department}[])">
+      <summary>
+            조직명 매칭 검색 (LIKE 검색)을 수행합니다.
+            </summary>
+      <param name="company">소속 회사</param>
+      <param name="nameToMatch">검색할 조직명</param>
+      <param name="matchMode">검색 매칭 모드</param>
+      <param name="firstResult">첫번째 결과 셋의 인덱스 (0부터 시작. null이면 0으로 간주)</param>
+      <param name="maxResults">결과 셋의 최대 레코드 수 (null 또는 0 이하의 값은 무시된다)</param>
+      <param name="orders">정렬 순서</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindAllDepartmentByHierarchy(NSoft.NAccess.Domain.Model.Department,NSoft.NAccess.HierarchyContainsKinds)">
+      <summary>
+            지정된 부서와 옵션에 따라 하위 부서 또는 상위부서를 포함한 부서정보를 제공합니다.
+            </summary>
+      <param name="department">조회할 기준 부서</param>
+      <param name="hierarchyContainsKind">부서의 조상/자손도 포함할 것인가 여부</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.DeleteDepartment(NSoft.NAccess.Domain.Model.Department)">
+      <summary>
+            지정된 Department 를 삭제합니다. (NOTE: 하위 부서 및 Association의 삭제는 HBM의 cascade에 따라 달라집니다)
+            </summary>
+      <param name="department">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.DeleteAllDepartmentByCompany(NSoft.NAccess.Domain.Model.Company)">
+      <summary>
+            지정된 Company의 모든 부서정보를 삭제합니다.
+            </summary>
+      <param name="company">
+      </param>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.BuildQueryOverOfDepartmentMember(NSoft.NAccess.Domain.Model.Department,NSoft.NAccess.Domain.Model.User,NSoft.NAccess.Domain.Model.EmployeeTitle,System.Nullable{System.Boolean},System.Nullable{System.Boolean})">
+      <summary>
+            부서-소속원 정보 (<see cref="T:NSoft.NAccess.Domain.Model.DepartmentMember" />)를 검색하기 위한 Criteria를 빌드합니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.BuildCriteriaOfDepartmentMember(NSoft.NAccess.Domain.Model.Department,NSoft.NAccess.Domain.Model.User,NSoft.NAccess.Domain.Model.EmployeeTitle,System.Nullable{System.Boolean},System.Nullable{System.Boolean})">
+      <summary>
+            부서-소속원 정보 (<see cref="T:NSoft.NAccess.Domain.Model.DepartmentMember" />)를 검색하기 위한 Criteria를 빌드합니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.IsDepartmentMember(NSoft.NAccess.Domain.Model.Department,NSoft.NAccess.Domain.Model.User)">
+      <summary>
+            부서에 소속된 사용자인가 검사합니다.
+            </summary>
+      <param name="department">
+      </param>
+      <param name="user">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.CreateDepartmentMember(NSoft.NAccess.Domain.Model.Department,NSoft.NAccess.Domain.Model.User,NSoft.NAccess.Domain.Model.EmployeeTitle)">
+      <summary>
+            부서에 직원 소속 정보를 생성합니다.
+            </summary>
+      <param name="department">부서</param>
+      <param name="user">사용자</param>
+      <param name="employeeTitle">직책 정보</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.ChangeDepartmentFor(NSoft.NAccess.Domain.Model.User,NSoft.NAccess.Domain.Model.Department,NSoft.NAccess.Domain.Model.Department)">
+      <summary>
+            지정된 직원의 소속 부서를 변경합니다.
+            </summary>
+      <param name="user">
+      </param>
+      <param name="oldDepartment">
+      </param>
+      <param name="newDepartment">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindAllDepartmemtMemberByCompany(NSoft.NAccess.Domain.Model.Company,System.Nullable{System.Int32},System.Nullable{System.Int32},NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.DepartmentMember}[])">
+      <summary>
+            지정된 회사의 모든 부서-직원 소속 정보를 로드합니다.
+            </summary>
+      <param name="company">회사</param>
+      <param name="firstResult">첫번째 결과 셋의 인덱스 (0부터 시작. null이면 0으로 간주)</param>
+      <param name="maxResults">결과 셋의 최대 레코드 수 (null 또는 0 이하의 값은 무시된다)</param>
+      <param name="orders">정렬 순서</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindAllDepartmemtMemberByCompany(NSoft.NAccess.Domain.Model.Company)">
+      <summary>
+            지정된 회사의 모든 부서-직원 소속 정보를 로드합니다.
+            </summary>
+      <param name="company">회사</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindAllDepartmentMemberByDepartmentHierarchy(NSoft.NAccess.Domain.Model.Department,NSoft.NAccess.HierarchyContainsKinds)">
+      <summary>
+            지정된 부서의 조상 또는 자손의 소속 정보까지 가져올 것인가?  
+            </summary>
+      <param name="department">조회할 부서</param>
+      <param name="hierarchyContainsKinds">부서의 조상/자손도 포함할 것인가 여부</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.DeleteDepartmentMember(NSoft.NAccess.Domain.Model.DepartmentMember)">
+      <summary>
+            부서-직원 소속 정보를 제거합니다.
+            </summary>
+      <param name="member">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.DeleteDepartmentMember(NSoft.NAccess.Domain.Model.Department,NSoft.NAccess.Domain.Model.User)">
+      <summary>
+            부서-직원 소속 정보를 제거합니다.
+            </summary>
+      <param name="department">
+      </param>
+      <param name="user">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.DeleteAllDepartmentMemberByDepartment(NSoft.NAccess.Domain.Model.Department)">
+      <summary>
+            지정한 부서의 부서원 소속 정보를 모두 삭제합니다.
+            </summary>
+      <param name="department">
+      </param>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.DeleteAllDepartmentMemberByUser(NSoft.NAccess.Domain.Model.User)">
+      <summary>
+            지정된 사용자의 모든 부서 소속 정보를 삭제합니다.
+            </summary>
+      <param name="user">
+      </param>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.GetOrCreateEmployeeGrade(NSoft.NAccess.Domain.Model.Company,System.String)">
+      <summary>
+            직급 정보를 조회합니다. 없으면 새로 생성합니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.CreateEmployeeGrade(NSoft.NAccess.Domain.Model.Company,System.String,System.String)">
+      <summary>
+            새로운 직급 정보를 생성합니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindOneEmployeeGradeByCode(NSoft.NAccess.Domain.Model.Company,System.String)">
+      <summary>
+            직급정보를 조회합니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindAllEmployeeGradeByCompany(NSoft.NAccess.Domain.Model.Company)">
+      <summary>
+            지정된 회사의 모든 사원 직급 정보를 가져옵니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindAllEmployeeGradeByCompany(NSoft.NAccess.Domain.Model.Company,System.Nullable{System.Int32},System.Nullable{System.Int32},NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.EmployeeGrade}[])">
+      <summary>
+            지정된 회사의 모든 사원 직급 정보를 가져옵니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.GetPageOfEmployeeGradeByCompany(NSoft.NAccess.Domain.Model.Company,System.Int32,System.Int32,NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.EmployeeGrade}[])">
+      <summary>
+            지정한 회사의 모든 사원 직급 정보를 페이징 처리해서 로드합니다.
+            </summary>
+      <param name="company">소속 회사</param>
+      <param name="pageIndex">Page Index (0부터 시작합니다)</param>
+      <param name="pageSize">Page Size (0보다 큰 값이어야 합니다)</param>
+      <param name="orders">정렬 방식</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.GetOrCreateEmployeePosition(NSoft.NAccess.Domain.Model.Company,System.String)">
+      <summary>
+            직위 (Employee Position) 정보를 조회합니다. 없으면 새로 생성합니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.CreateEmployeePosition(NSoft.NAccess.Domain.Model.Company,System.String,System.String)">
+      <summary>
+            사원 직위 정보를 생성합니다.
+            </summary>
+      <param name="company">
+      </param>
+      <param name="code">
+      </param>
+      <param name="name">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindOneEmployeePositionByCode(NSoft.NAccess.Domain.Model.Company,System.String)">
+      <summary>
+            직위 정보를 조회합니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindAllEmployeePositionByCompany(NSoft.NAccess.Domain.Model.Company)">
+      <summary>
+            지정된 회사의 사원 직위 정보를 모두 조회합니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindAllEmployeePositionByCompany(NSoft.NAccess.Domain.Model.Company,System.Nullable{System.Int32},System.Nullable{System.Int32},NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.EmployeePosition}[])">
+      <summary>
+            지정된 회사의 사원 직위 정보를 모두 조회합니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.GetPageOfEmployeePositionByCompany(NSoft.NAccess.Domain.Model.Company,System.Int32,System.Int32,NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.EmployeePosition}[])">
+      <summary>
+            지정한 회사의 모든 사원 직위 정의 정보를 페이징 처리해서 로드합니다.
+            </summary>
+      <param name="company">소속 회사</param>
+      <param name="pageIndex">Page Index (0부터 시작합니다)</param>
+      <param name="pageSize">Page Size (0보다 큰 값이어야 합니다)</param>
+      <param name="orders">정렬 방식</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.GetOrCreateEmployeeTitle(NSoft.NAccess.Domain.Model.Company,System.String)">
+      <summary>
+            직책 (Employee Title) 정보를 조회합니다. 없으면 새로 생성합니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.CreateEmployeeTitle(NSoft.NAccess.Domain.Model.Company,System.String,System.String)">
+      <summary>
+            사원 직책 정보를 생성합니다.
+            </summary>
+      <param name="company">
+      </param>
+      <param name="code">
+      </param>
+      <param name="name">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindOneEmployeeTitleByCode(NSoft.NAccess.Domain.Model.Company,System.String)">
+      <summary>
+            직책 정보를 조회합니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindAllEmployeeTitleByCompany(NSoft.NAccess.Domain.Model.Company)">
+      <summary>
+            지정된 회사의 사원 직위 정보를 모두 조회합니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindAllEmployeeTitleByCompany(NSoft.NAccess.Domain.Model.Company,System.Nullable{System.Int32},System.Nullable{System.Int32},NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.EmployeeTitle}[])">
+      <summary>
+            지정된 회사의 사원 직위 정보를 모두 조회합니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.GetPageOfEmployeeTitleByCompany(NSoft.NAccess.Domain.Model.Company,System.Int32,System.Int32,NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.EmployeeTitle}[])">
+      <summary>
+            지정한 회사의 모든 사원 직책 정의 정보를 페이징 처리해서 로드합니다.
+            </summary>
+      <param name="company">소속 회사</param>
+      <param name="pageIndex">Page Index (0부터 시작합니다)</param>
+      <param name="pageSize">Page Size (0보다 큰 값이어야 합니다)</param>
+      <param name="orders">정렬 방식</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.BuildQueryOverOfGroup(NSoft.NAccess.Domain.Model.Company,System.String,System.Nullable{NSoft.NAccess.GroupKinds},System.String,System.Nullable{System.Boolean})">
+      <summary>
+            그룹 정보 조회를 위한 <see cref="T:NHibernate.Criterion.QueryOver" />를 빌드합니다.
+            </summary>
+      <param name="company">
+      </param>
+      <param name="code">
+      </param>
+      <param name="kind">
+      </param>
+      <param name="name">
+      </param>
+      <param name="isActive">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.BuildCriteriaOfGroup(NSoft.NAccess.Domain.Model.Company,System.String,System.Nullable{NSoft.NAccess.GroupKinds},System.String,System.Nullable{System.Boolean})">
+      <summary>
+            그룹 정보 조회를 위한 <see cref="T:NHibernate.Criterion.DetachedCriteria" />를 빌드합니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.GetOrCreateGroup(NSoft.NAccess.Domain.Model.Company,System.String)">
+      <summary>
+            지정된 회사의 <paramref name="code" />를 가지는 그룹 정보를 로드한다. 만약 없다면, 새로 생성해서 반환한다.
+            </summary>
+      <param name="company">소속 회사</param>
+      <param name="code">그룹 Id</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindOneGroupByCode(NSoft.NAccess.Domain.Model.Company,System.String)">
+      <summary>
+            지정된 회사의 <paramref name="code" />를 가지는 그룹 정보를 로드한다.
+            </summary>
+      <param name="company">소속 회사</param>
+      <param name="code">그룹 Id</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindAllGroupByCompany(NSoft.NAccess.Domain.Model.Company)">
+      <summary>
+            특정 회사의 모든 Group 정보를 조회합니다.
+            </summary>
+      <param name="company">회사</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindAllGroupByCompany(NSoft.NAccess.Domain.Model.Company,System.Nullable{System.Int32},System.Nullable{System.Int32},NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.Group}[])">
+      <summary>
+            특정 회사의 모든 Group 정보를 조회합니다.
+            </summary>
+      <param name="company">회사</param>
+      <param name="firstResult">첫번째 결과 셋의 인덱스 (0부터 시작. null이면 0으로 간주)</param>
+      <param name="maxResults">결과 셋의 최대 레코드 수 (null 또는 0 이하의 값은 무시된다)</param>
+      <param name="orders">정렬 순서</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.GetPageOfGroupByCompany(NSoft.NAccess.Domain.Model.Company,System.Int32,System.Int32,NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.Group}[])">
+      <summary>
+            특정 회사의 Group 정보를 Paging 조회합니다
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.BuildQueryOverOfGroupActor(System.String,System.String,System.String,System.Nullable{NSoft.NAccess.ActorKinds})">
+      <summary>
+            그룹-구성원(GroupActor) 정보를 조회하기 위한 QueryOver를 빌드합니다
+            </summary>
+      <param name="companyCode">회사코드</param>
+      <param name="groupCode">그룹 코드</param>
+      <param name="actorCode">소속원 코드</param>
+      <param name="actorKind">소속원 종류 (회사|부서|사용자 등)</param>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.BuildQueryOverOfGroupActor(NSoft.NAccess.Domain.Model.Group,System.String,System.Nullable{NSoft.NAccess.ActorKinds})">
+      <summary>
+            그룹-구성원(GroupActor) 정보를 조회하기 위한 QueryOver를 빌드합니다
+            </summary>
+      <param name="group">Group</param>
+      <param name="actorCode">소속원 코드</param>
+      <param name="actorKind">소속원 종류 (회사|부서|사용자 등)</param>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.BuildCriteriaOfGroupActor(System.String,System.String,System.String,System.Nullable{NSoft.NAccess.ActorKinds})">
+      <summary>
+            그룹구성원 정보를 조회하기 위한 Criteria를 빌드합니다. (null 이거나 empty string인 경우에는 검색 조건에서 제외됩니다.)
+            </summary>
+      <param name="companyCode">회사코드</param>
+      <param name="groupCode">그룹 코드</param>
+      <param name="actorCode">소속원 코드</param>
+      <param name="actorKind">소속원 종류 (회사|부서|사용자 등)</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.BuildCriteriaOfGroupActor(NSoft.NAccess.Domain.Model.Group,System.String,System.Nullable{NSoft.NAccess.ActorKinds})">
+      <summary>
+            그룹구성원 정보를 조회하기 위한 Criteria를 빌드합니다. (null 이거나 empty string인 경우에는 검색 조건에서 제외됩니다.)
+            </summary>
+      <param name="group">그룹</param>
+      <param name="actorCode">소속원 코드</param>
+      <param name="actorKind">소속원 종류 (회사|부서|사용자 등)</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.GetOrCreateGroupActor(NSoft.NAccess.Domain.Model.Group,System.String,NSoft.NAccess.ActorKinds)">
+      <summary>
+            GroupActor를 조회합니다. 없으면 새로 생성해서 반환합니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.CreateGroupActor(NSoft.NAccess.Domain.Model.Group,System.String,NSoft.NAccess.ActorKinds)">
+      <summary>
+            새로운 그룹을 만듭니다.
+            </summary>
+      <param name="group">그룹 정보</param>
+      <param name="actorCode">그룹 소속원 코드 (Actor 코드 : 회사|부서|그룹|사용자 코드)</param>
+      <param name="actorKind">그룹 소속원 종류 (사용자|부서| 타 그룹)</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindOneGroupActor(NSoft.NAccess.Domain.Model.Group,System.String,NSoft.NAccess.ActorKinds)">
+      <summary>
+        <see cref="T:NSoft.NAccess.Domain.Model.GroupActor" />를 조회합니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindAllGroupActorByGroup(NSoft.NAccess.Domain.Model.Group)">
+      <summary>
+            지정된 그룹-구성원(GroupActor) 정보를 구합니다.
+            </summary>
+      <param name="group">그룹 정보</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindAllGroupActorByCompany(NSoft.NAccess.Domain.Model.Company,System.Nullable{System.Int32},System.Nullable{System.Int32},NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.GroupActor}[])">
+      <summary>
+            지정된 회사의 모든 그룹-구성원(GroupActor) 정보를 조회합니다.
+            </summary>
+      <param name="company">그룹이 소속된 회사</param>
+      <param name="firstResult">첫번째 결과 셋의 인덱스 (0부터 시작. null이면 0으로 간주)</param>
+      <param name="maxResults">결과 셋의 최대 레코드 수 (null 또는 0 이하의 값은 무시된다)</param>
+      <param name="orders">정렬 순서</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindAllGroupActorByCompany(NSoft.NAccess.Domain.Model.Company)">
+      <summary>
+            지정된 회사의 모든 그룹-구성원(GroupActor) 정보를 조회합니다.
+            </summary>
+      <param name="company">그룹이 소속된 회사</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindAllGroupActorByActor(NSoft.NAccess.Domain.Model.Company,System.String,System.Nullable{NSoft.NAccess.ActorKinds},System.Nullable{System.Int32},System.Nullable{System.Int32},NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.GroupActor}[])">
+      <summary>
+            지정한 구성원이 속한 그룹구성원 정보를 조회합니다.
+            </summary>
+      <param name="company">그룹이 소속된 회사</param>
+      <param name="actorCode">그룹 소속원 코드 (Actor 코드 : 회사|부서|그룹|사용자 코드)</param>
+      <param name="actorKind">그룹 소속원 종류 (사용자|부서| 타 그룹)</param>
+      <param name="firstResult">첫번째 결과 셋의 인덱스 (0부터 시작. null이면 0으로 간주)</param>
+      <param name="maxResults">결과 셋의 최대 레코드 수 (null 또는 0 이하의 값은 무시된다)</param>
+      <param name="orders">정렬 순서</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.GetPageOfGroupActorByCompany(NSoft.NAccess.Domain.Model.Company,System.Int32,System.Int32,NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.GroupActor}[])">
+      <summary>
+            지정한 회사에 속한 그룹-구성원(GroupActor) 정보를 Paging 처리해서 로드합니다
+            </summary>
+      <param name="company">검색할 회사</param>
+      <param name="pageIndex">페이지 인덱스 (0부터 시작)</param>
+      <param name="pageSize">페이지 크기 (0보다 커야 한다. 보통 10)</param>
+      <param name="orders">정렬 순서</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.IsGroupMember(NSoft.NAccess.Domain.Model.Group,System.String,NSoft.NAccess.ActorKinds)">
+      <summary>
+            지정된 그룹에 지정한 actor가 구성원으로 등록되어 있는지 검사한다.
+            NOTE: 현재로서는 직접적인 매핑정보만을 수집한다. 즉 그룹에 부서가 구성원이고, 그 부서의 구성원으로서의 직원은 검출하지 못한다.
+            </summary>
+      <param name="group">그룹 정보</param>
+      <param name="actorCode">그룹 소속원 코드 (Actor 코드 : 회사|부서|그룹|사용자 코드)</param>
+      <param name="actorKind">그룹 소속원 종류 (사용자|부서| 타 그룹)</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.BuildQueryableOfUser(NSoft.NAccess.Domain.Model.Company,System.String,System.String)">
+      <summary>
+            사용자 (<see cref="T:NSoft.NAccess.Domain.Model.User" />) 정보를 조회하기 위한 IQueryable{User} 를 빌드합니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.BuildQueryableOfUser(NSoft.NAccess.Domain.Model.Company,NSoft.NAccess.Domain.Model.Department,System.String,System.String,System.Nullable{System.Int32},System.String,System.String,System.String)">
+      <summary>
+            사용자 (<see cref="T:NSoft.NAccess.Domain.Model.User" />) 정보를 조회하기 위한 IQueryable{User} 를 빌드합니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.BuildQueryOverOfUser(NSoft.NAccess.Domain.Model.Company,System.String,System.String)">
+      <summary>
+            사용자 (<see cref="T:NSoft.NAccess.Domain.Model.User" />) 정보를 조회하기 위한 QueryOver{User, User}를 빌드합니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.BuildQueryOverOfUser(NSoft.NAccess.Domain.Model.Company,NSoft.NAccess.Domain.Model.Department,System.String,System.String,System.Nullable{System.Int32},System.String,System.String,System.String)">
+      <summary>
+            사용자 (<see cref="T:NSoft.NAccess.Domain.Model.User" />) 정보를 조회하기 위한 QueryOver{User, User}를 빌드합니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.BuildCriteriaOfUser(NSoft.NAccess.Domain.Model.Company,NSoft.NAccess.Domain.Model.Department,System.String,System.String,System.Nullable{System.Int32},System.String,System.String,System.String)">
+      <summary>
+            사용자 (<see cref="T:NSoft.NAccess.Domain.Model.User" />) 정보를 조회하기 위한 Criteria를 빌드합니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.AuthenticateUser(NSoft.NAccess.Domain.Model.Company,System.String,System.String)">
+      <summary>
+            사용자 로그인 계정 정보로 사용자를 인증합니다.
+            </summary>
+      <param name="company">
+      </param>
+      <param name="loginId">
+      </param>
+      <param name="password">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.GetOrCreateUser(NSoft.NAccess.Domain.Model.Company,System.String)">
+      <summary>
+            지정한 회사의 사원 정보를 로드합니다. 만약 없다면, 새로 생성해서 저장한 후 로드 합니다. (그냥 Load 시에는 <see cref="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindOneUserByCode(NSoft.NAccess.Domain.Model.Company,System.String)" />로 호출하시기 바랍니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindOneUserByCode(NSoft.NAccess.Domain.Model.Company,System.String)">
+      <summary>
+            특정 사용자 정보를 Load합니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindOneUserByEmpNo(NSoft.NAccess.Domain.Model.Company,System.String)">
+      <summary>
+            사번으로 직원 찾기
+            </summary>
+      <param name="company">
+      </param>
+      <param name="empNo">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindOneUserByLogin(NSoft.NAccess.Domain.Model.Company,System.String)">
+      <summary>
+            로그인 계정을 가진 사용자 정보를 로드합니다.
+            </summary>
+      <param name="company">
+      </param>
+      <param name="loginId">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindOneUserByLogin(NSoft.NAccess.Domain.Model.Company,System.String,System.String)">
+      <summary>
+            로그인 정보를 가진 사용자 정보를 로드합니다.
+            </summary>
+      <param name="company">
+      </param>
+      <param name="loginId">
+      </param>
+      <param name="password">
+      </param>
+      <returns>반환되는 User 정보가 있다면, 로그인 성공, 없다면 비밀번호가 틀렸다는 의미이다.</returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindAllUserByCompany(NSoft.NAccess.Domain.Model.Company)">
+      <summary>
+            지정된 회사의 모든 사용자 정보를 조회합니다.
+            </summary>
+      <param name="company">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindAllUserByCompanyAndNameToMatch(NSoft.NAccess.Domain.Model.Company,System.String,NHibernate.Criterion.MatchMode)">
+      <summary>
+            지정된 회사에서, 지정된 이름과 매칭되는 (LIKE 검색) 사용자 정보를 조회합니다.
+            </summary>
+      <param name="company">
+      </param>
+      <param name="nameToMatch">
+      </param>
+      <param name="matchMode">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.FindAllUserByDepartment(NSoft.NAccess.Domain.Model.Department,NSoft.NAccess.HierarchyContainsKinds)">
+      <summary>
+            지정된 부서에 소속된 직원들을 반환합니다.
+            </summary>
+      <param name="department">부서</param>
+      <param name="hierarchyContainsKind">부서의 조상/자손도 포함할 것인가 여부</param>
+      <returns>부서 소속원 컬렉션을 반환한다.</returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.GetPageOfUserByCompany(NSoft.NAccess.Domain.Model.Company,System.Int32,System.Int32,NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.User}[])">
+      <summary>
+            지정된 회사의 모든 사용자 정보를 Paging 처리하여 로드합니다
+            </summary>
+      <param name="company">회사</param>
+      <param name="pageIndex">페이지 인덱스 (0부터 시작)</param>
+      <param name="pageSize">페이지 크기 (0보다 커야 한다. 보통 10)</param>
+      <param name="orders">정렬 순서</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.OrganizationRepository.GetPageOfUserByDepartment(NSoft.NAccess.Domain.Model.Department,NSoft.NAccess.HierarchyContainsKinds,System.Int32,System.Int32,NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.User}[])">
+      <summary>
+            지정된 부서에 소속된 직원들을 반환합니다.
+            </summary>
+      <param name="department">부서</param>
+      <param name="hierarchyContainsKind">부서의 조상/자손도 포함할 것인가 여부</param>
+      <param name="pageIndex">페이지 인덱스 (0부터 시작)</param>
+      <param name="pageSize">페이지 크기 (0보다 커야 한다. 보통 10)</param>
+      <param name="orders">정렬 순서</param>
+      <returns>부서 소속원 컬렉션을 반환한다.</returns>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Repositories.ProductRepository">
+      <summary>
+            권한 관련 Domain Service
+            </summary>
+      <summary>
+            제품 관련 Domain Service
+            </summary>
+      <summary>
+            제품 관련 Domain Service
+            </summary>
+      <summary>
+            파일 관련 Domain Service
+            </summary>
+      <summary>
+            마스터 코드 관련 정보
+            </summary>
+      <summary>
+            메뉴와 관련된 Domain Service 입니다.
+            </summary>
+      <summary>
+            제품 관련 Domain Service
+            </summary>
+      <summary>
+            리소스 관련 Domain Service 입니다.
+            </summary>
+      <summary>
+            제품의 Configuration 관련 Domain Service
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.BuildQueryOverOfResourceActor(NSoft.NAccess.Domain.Model.Resource,System.String,System.String,System.String,System.Nullable{NSoft.NAccess.ActorKinds},System.Nullable{NSoft.NAccess.AuthorityKinds})">
+      <summary>
+            권한관련 정보를 가진 <see cref="T:NSoft.NAccess.Domain.Model.ResourceActor" />정보를 조회하기 위한 QueryOver 를 빌드합니다.
+            </summary>
+      <param name="resource">리소스 종류</param>
+      <param name="resourceInstanceId">대상 리소스 ID</param>
+      <param name="companyCode">회사 코드</param>
+      <param name="actorCode">접근자 코드 (회사|부서|사용자|그룹 코드)</param>
+      <param name="actorKind">접근자 종류</param>
+      <param name="authorityKind">권한 종류</param>
+      <returns>접근 권한을 나타내는 <see cref="T:NSoft.NAccess.Domain.Model.ResourceActor" />를 조회하기 위한 QueryOver</returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.BuildQueryOverOfResourceActor(System.String,System.String,System.String,System.String,System.String,System.Nullable{NSoft.NAccess.ActorKinds},System.Nullable{NSoft.NAccess.AuthorityKinds})">
+      <summary>
+            권한관련 정보를 가진 <see cref="T:NSoft.NAccess.Domain.Model.ResourceActor" />정보를 조회하기 위한 QueryOver 를 빌드합니다.
+            </summary>
+      <param name="productCode">제품 코드</param>
+      <param name="resourceCode">리소스 종류 코드</param>
+      <param name="resourceInstanceId">대상 리소스 ID</param>
+      <param name="companyCode">회사 코드</param>
+      <param name="actorCode">접근자 코드 (회사|부서|사용자|그룹 코드)</param>
+      <param name="actorKind">접근자 종류</param>
+      <param name="authorityKind">권한 종류</param>
+      <returns>접근 권한을 나타내는 <see cref="T:NSoft.NAccess.Domain.Model.ResourceActor" />를 조회하기 위한 QueryOver</returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.BuildCriteriaOfResourceActor(NSoft.NAccess.Domain.Model.Resource,System.String,System.String,System.String,System.Nullable{NSoft.NAccess.ActorKinds},System.Nullable{NSoft.NAccess.AuthorityKinds})">
+      <summary>
+            권한관련 정보를 가진 <see cref="T:NSoft.NAccess.Domain.Model.ResourceActor" />정보를 조회하기 위한 Criteria를 빌드합니다.
+            </summary>
+      <param name="resource">리소스 종류</param>
+      <param name="resourceInstanceId">대상 리소스 ID</param>
+      <param name="companyCode">회사 코드</param>
+      <param name="actorCode">접근자 코드 (회사|부서|사용자|그룹 코드)</param>
+      <param name="actorKind">접근자 종류</param>
+      <param name="authorityKind">권한 종류</param>
+      <returns>접근 권한을 나타내는 <see cref="T:NSoft.NAccess.Domain.Model.ResourceActor" />를 조회하기 위한 Criteria</returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.BuildCriteriaOfResourceActor(System.String,System.String,System.String,System.String,System.String,System.Nullable{NSoft.NAccess.ActorKinds},System.Nullable{NSoft.NAccess.AuthorityKinds})">
+      <summary>
+            권한관련 정보를 가진 <see cref="T:NSoft.NAccess.Domain.Model.ResourceActor" />정보를 조회하기 위한 Criteria를 빌드합니다.
+            </summary>
+      <param name="productCode">제품 코드</param>
+      <param name="resourceCode">리소스 종류 코드</param>
+      <param name="resourceInstanceId">대상 리소스 ID</param>
+      <param name="companyCode">회사 코드</param>
+      <param name="actorCode">접근자 코드 (회사|부서|사용자|그룹 코드)</param>
+      <param name="actorKind">접근자 종류</param>
+      <param name="authorityKind">권한 종류</param>
+      <returns>접근 권한을 나타내는 <see cref="T:NSoft.NAccess.Domain.Model.ResourceActor" />를 조회하기 위한 Criteria</returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.CreateResourceActor(NSoft.NAccess.Domain.Model.Resource,System.String,System.String,System.String,NSoft.NAccess.ActorKinds,NSoft.NAccess.AuthorityKinds)">
+      <summary>
+            새로운 리소스에 대한 접근 권한 정보를 생성합니다.
+            </summary>
+      <param name="resource">접근 대상 리소스 종류</param>
+      <param name="resourceInstanceId">접근 대상 리소스 Id</param>
+      <param name="companyCode">회사 코드</param>
+      <param name="actorCode">접근자 코드 (회사|부서|사용자|그룹 코드)</param>
+      <param name="actorKind">접근자 (부서|사용자|그룹 등) 종류</param>
+      <param name="authorityKind">접근 권한 종류</param>
+      <returns>새로 생성한 리소스 접근 권한 정보</returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.InsertResourceActor(NSoft.NAccess.Domain.Model.Resource,System.String,System.String,System.String,NSoft.NAccess.ActorKinds,NSoft.NAccess.AuthorityKinds)">
+      <summary>
+            새로운 리소스에 대한 접근 권한 정보를 추가합니다. (NOTE: StatelessSession을 사용하여 추가하므로 성능이 빠릅니다.)
+            </summary>
+      <param name="resource">접근 대상 리소스 종류</param>
+      <param name="resourceInstanceId">접근 대상 리소스 Id</param>
+      <param name="companyCode">회사 코드</param>
+      <param name="actorCode">접근자 코드 (회사|부서|사용자|그룹 코드)</param>
+      <param name="actorKind">접근자 (부서|사용자|그룹 등) 종류</param>
+      <param name="authorityKind">접근 권한 종류</param>
+      <returns>새로 생성한 리소스 접근 권한 정보</returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.FindAllResourceActorByResource(NSoft.NAccess.Domain.Model.Resource,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.ResourceActor}[])">
+      <summary>
+            리소스 정보를 기준으로 모든 접근 권한 정보를 조회합니다.
+            </summary>
+      <param name="resource">접근 대상 리소스 종류</param>
+      <param name="resourceInstanceId">접근 대상 리소스 Id</param>
+      <param name="companyCode">회사 코드</param>
+      <param name="firstResult">첫번째 결과 셋의 인덱스 (0부터 시작. null이면 0으로 간주)</param>
+      <param name="maxResults">결과 셋의 최대 레코드 수 (null 또는 0 이하의 값은 무시된다)</param>
+      <param name="orders">정렬 순서</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.FindAllResourceActorByResource(NSoft.NAccess.Domain.Model.Resource,System.String,System.String)">
+      <summary>
+            리소스 정보를 기준으로 모든 접근 권한 정보를 조회합니다.
+            </summary>
+      <param name="resource">접근 대상 리소스 종류</param>
+      <param name="resourceInstanceId">접근 대상 리소스 Id</param>
+      <param name="companyCode">회사 코드</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.FindAllResourceActorByActor(System.String,System.String,System.Nullable{NSoft.NAccess.ActorKinds},System.Nullable{System.Int32},System.Nullable{System.Int32},NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.ResourceActor}[])">
+      <summary>
+            지정한 접근자의 리소스 접근 권한 정보를 모두 조회합니다.
+            </summary>
+      <param name="companyCode">접근자 소속 회사 코드</param>
+      <param name="actorCode">접근자 코드 (회사|부서|사용자|그룹 코드)</param>
+      <param name="actorKind">접근자 (부서|사용자|그룹 등) 종류</param>
+      <param name="firstResult">첫번째 결과 셋의 인덱스 (0부터 시작. null이면 0으로 간주)</param>
+      <param name="maxResults">결과 셋의 최대 레코드 수 (null 또는 0 이하의 값은 무시된다)</param>
+      <param name="orders">정렬 순서</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.FindAllResourceActorByActor(System.String,System.String,System.Nullable{NSoft.NAccess.ActorKinds})">
+      <summary>
+            지정한 접근자의 리소스 접근 권한 정보를 모두 조회합니다.
+            </summary>
+      <param name="companyCode">접근자 소속 회사 코드</param>
+      <param name="actorCode">접근자 코드 (회사|부서|사용자|그룹 코드)</param>
+      <param name="actorKind">접근자 (부서|사용자|그룹 등) 종류</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.GetPageOfResourceActorByResource(NSoft.NAccess.Domain.Model.Resource,System.String,System.String,System.Int32,System.Int32,NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.ResourceActor}[])">
+      <summary>
+            리소스 접근 권한 정보(ResourceActor) 를 Paging 처리해서 로드합니다...
+            </summary>
+      <param name="resource">접근 대상 리소스 종류</param>
+      <param name="resourceInstanceId">접근 대상 리소스 Id (null이면 검색 대상에서 제외)</param>
+      <param name="companyCode">회사 코드 (null이면 검색 대상에서 제외)</param>
+      <param name="pageIndex">페이지 인덱스 (0부터 시작)</param>
+      <param name="pageSize">페이지 크기 (0보다 커야 한다. 보통 10)</param>
+      <param name="orders">정렬 순서</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.GetPageOfResourceActorByActor(System.String,System.String,System.Nullable{NSoft.NAccess.ActorKinds},System.Int32,System.Int32,NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.ResourceActor}[])">
+      <summary>
+            리소스 접근 권한 정보(ResourceActor) 를 Paging 처리해서 로드합니다...
+            </summary>
+      <param name="companyCode">접근자 소속 회사 코드 (not null)</param>
+      <param name="actorCode">접근자 코드 (회사|부서|사용자|그룹 코드) (null 이면 검색 조건에서 제외)</param>
+      <param name="actorKind">접근자 (부서|사용자|그룹 등) 종류 (null이면 검색 조건에서 제외)</param>
+      <param name="pageIndex">페이지 인덱스 (0부터 시작)</param>
+      <param name="pageSize">페이지 크기 (0보다 커야 한다. 보통 10)</param>
+      <param name="orders">정렬 순서</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.#ctor">
+      <summary>
+            생성자
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.BuildQueryOverOfFavorite(NSoft.NAccess.Domain.Model.Product,NSoft.NAccess.Domain.Model.Company,System.String,System.Nullable{NSoft.NAccess.ActorKinds},System.String,NSoft.NFramework.TimePeriods.ITimePeriod)">
+      <summary>
+            즐겨찾기를 위한 질의 객체 (<see cref="T:NHibernate.Criterion.DetachedCriteria" />)를 빌드합니다.
+            </summary>
+      <param name="product">지정된 제품, null이면 검색조건에서 제외합니다.</param>
+      <param name="company">지정된 회사, null이면 검색조건에서 제외합니다.</param>
+      <param name="ownerCode">소유자 코드, null이면 검색조건에서 제외합니다.</param>
+      <param name="ownerKind">소유자 종류, <see cref="F:NSoft.NAccess.ActorKinds.Unknown" />이면 검색조건에서 제외합니다.</param>
+      <param name="registerCode">등록자 코드</param>
+      <param name="registTimeRange">등록일 검색 범위</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.BuildCriteriaOfFavorite(NSoft.NAccess.Domain.Model.Product,NSoft.NAccess.Domain.Model.Company,System.String,System.Nullable{NSoft.NAccess.ActorKinds},System.String,NSoft.NFramework.TimePeriods.ITimePeriod)">
+      <summary>
+            즐겨찾기를 위한 질의 객체 (<see cref="T:NHibernate.Criterion.DetachedCriteria" />)를 빌드합니다.
+            </summary>
+      <param name="product">지정된 제품, null이면 검색조건에서 제외합니다.</param>
+      <param name="company">지정된 회사, null이면 검색조건에서 제외합니다.</param>
+      <param name="ownerCode">소유자 코드, null이면 검색조건에서 제외합니다.</param>
+      <param name="ownerKind">소유자 종류, <see cref="F:NSoft.NAccess.ActorKinds.Unknown" />이면 검색조건에서 제외합니다.</param>
+      <param name="registerCode">등록자 코드</param>
+      <param name="registTimeRange">등록일 검색 범위</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.GetOrCreateFavorite(NSoft.NAccess.Domain.Model.Product,NSoft.NAccess.Domain.Model.Company,System.String,NSoft.NAccess.ActorKinds,System.String)">
+      <summary>
+            즐겨찾기를 조회합니다. DB에 존재하지 않으면 새로 생성합니다.
+            </summary>
+      <param name="product">
+      </param>
+      <param name="company">
+      </param>
+      <param name="ownerCode">
+      </param>
+      <param name="ownerKind">
+      </param>
+      <param name="content">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.CreateFavorite(NSoft.NAccess.Domain.Model.Product,NSoft.NAccess.Domain.Model.Company,System.String,NSoft.NAccess.ActorKinds,System.String)">
+      <summary>
+            즐겨찾기 생성
+            </summary>
+      <param name="product">제품</param>
+      <param name="company">소유자 회사</param>
+      <param name="ownerCode">소유자 코드</param>
+      <param name="ownerKind">소유자 종류</param>
+      <param name="content">즐겨찾기 내용</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.FindOneFavorite(NSoft.NAccess.Domain.Model.Product,NSoft.NAccess.Domain.Model.Company,System.String,NSoft.NAccess.ActorKinds)">
+      <summary>
+            즐겨찾기 조회
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.FindAllFavoriteByOwner(NSoft.NAccess.Domain.Model.Product,NSoft.NAccess.Domain.Model.Company,System.String,NSoft.NAccess.ActorKinds)">
+      <summary>
+            소유자의 즐겨찾기 정보를 조회합니다.
+            </summary>
+      <param name="product">지정된 제품, null이면 검색조건에서 제외합니다.</param>
+      <param name="company">지정된 회사, null이면 검색조건에서 제외합니다.</param>
+      <param name="ownerCode">소유자 Id, null이면 검색조건에서 제외합니다.</param>
+      <param name="ownerKind">소유자 종류, <see cref="F:NSoft.NAccess.ActorKinds.Unknown" />이면 검색조건에서 제외합니다.</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.FindAllFavoriteByOwner(NSoft.NAccess.Domain.Model.Product,NSoft.NAccess.Domain.Model.Company,System.String,NSoft.NAccess.ActorKinds,System.Nullable{System.Int32},System.Nullable{System.Int32},NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.Favorite}[])">
+      <summary>
+            소유자의 즐겨찾기 정보를 조회합니다.
+            </summary>
+      <param name="product">지정된 제품, null이면 검색조건에서 제외합니다.</param>
+      <param name="company">지정된 회사, null이면 검색조건에서 제외합니다.</param>
+      <param name="ownerCode">소유자 Id, null이면 검색조건에서 제외합니다.</param>
+      <param name="ownerKind">소유자 종류, <see cref="F:NSoft.NAccess.ActorKinds.Unknown" />이면 검색조건에서 제외합니다.</param>
+      <param name="firstResult">첫번째 레코드 인덱스</param>
+      <param name="maxResults">최대 레코드 수</param>
+      <param name="orders">정렬 방식</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.GetPageOfFavoriteByOwner(NSoft.NAccess.Domain.Model.Product,NSoft.NAccess.Domain.Model.Company,System.String,NSoft.NAccess.ActorKinds,System.Int32,System.Int32,NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.Favorite}[])">
+      <summary>
+            소유자의 즐겨찾기 정보를 Paging 처리해서 로드합니다.
+            </summary>
+      <param name="product">지정된 제품, null이면 검색조건에서 제외합니다.</param>
+      <param name="company">지정된 회사, null이면 검색조건에서 제외합니다.</param>
+      <param name="ownerCode">소유자 Id, null이면 검색조건에서 제외합니다.</param>
+      <param name="ownerKind">소유자 종류, <see cref="F:NSoft.NAccess.ActorKinds.Unknown" />이면 검색조건에서 제외합니다.</param>
+      <param name="pageIndex">페이지 인덱스 (0부터 시작)</param>
+      <param name="pageSize">페이지 크기 (0보다 커야 한다. 보통 10)</param>
+      <param name="orders">정렬 순서</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.DeleteAllFavoriteByOwner(NSoft.NAccess.Domain.Model.Product,NSoft.NAccess.Domain.Model.Company,System.String,NSoft.NAccess.ActorKinds)">
+      <summary>
+            소유자의 즐겨찾기 정보를 삭제합니다
+            </summary>
+      <param name="company">지정된 회사, null이면 검색조건에서 제외합니다.</param>
+      <param name="product">지정된 제품, null이면 검색조건에서 제외합니다.</param>
+      <param name="ownerCode">소유자 Id, null이면 검색조건에서 제외합니다.</param>
+      <param name="ownerKind">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.BuildQueryOverOfFileMapping(System.String,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Nullable{System.Int32})">
+      <summary>
+            FileMapping 정보 조회를 위한 QueryOver를 빌드합니다.
+            </summary>
+      <param name="productCode">제품 코드</param>
+      <param name="systemId">시스템 ID</param>
+      <param name="subId">서브 ID</param>
+      <param name="keyValues">키-값 설정</param>
+      <param name="state">상태</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.BuildCriteriaOfFileMapping(System.String,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Nullable{System.Int32})">
+      <summary>
+            FileMapping 정보 조회를 위한 Critieria를 빌드합니다.
+            </summary>
+      <param name="productCode">제품 코드</param>
+      <param name="systemId">시스템 ID</param>
+      <param name="subId">서브 ID</param>
+      <param name="keyValues">키-값 설정</param>
+      <param name="state">상태</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.CreateFileMapping(System.String,System.String,System.String)">
+      <summary>
+            새로운 FileMapping 정보를 생성합니다.
+            </summary>
+      <param name="productCode">제품 코드</param>
+      <param name="systemId">시스템 ID</param>
+      <param name="subId">시스템 서브 ID</param>
+      <returns>생성된 FileMapping 인스턴스</returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.FindAllFileMapping(System.String,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Nullable{System.Int32})">
+      <summary>
+            지정된 SystemId와 SubId 값을 가지는 모든 FileMapping 정보를 Load한다.
+            </summary>
+      <param name="productCode">제품 코드</param>
+      <param name="systemId">시스템 ID</param>
+      <param name="subId">시스템 서브 ID</param>
+      <param name="keyValues">Key-Value 검색조건 (예: Key1="user"), null이면 검색조건에서 제외된다.</param>
+      <param name="state">Mapping 상태 정보, null이면 검색조건에서 제외된다.</param>
+      <returns>검색된 FileMapping 컬렉션</returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.DeleteAllFileMapping(System.String,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Nullable{System.Int32})">
+      <summary>
+            검색조건에 해당하는 모든 FileMapping 정보를 삭제합니다. (만약 DeleteDate 속성으로 삭제여부를 사용하고 싶다면, Update를 사용해라)
+            </summary>
+      <param name="productCode">제품 코드</param>
+      <param name="systemId">시스템 ID</param>
+      <param name="subId">시스템 서브 ID</param>
+      <param name="keyValues">Key-Value 검색조건 (예: Key1="user"), null이면 검색조건에서 제외된다.</param>
+      <param name="state">Mapping 상태 정보, null이면 검색조건에서 제외된다.</param>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.BuildQueryOverOfFile(NSoft.NAccess.Domain.Model.FileMapping,System.String,System.String,System.String,System.Nullable{NSoft.NAccess.ActorKinds},System.String,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+      <summary>
+        <see cref="T:NSoft.NAccess.Domain.Model.File" /> 정보를 조회하기 위한 QueryOver를 빌드합니다.
+            </summary>
+      <param name="fileMapping">파일 매핑 정보</param>
+      <param name="resourceId">리소스 Id</param>
+      <param name="resourceKind">리소스 종류</param>
+      <param name="ownerCode">소유자 (부서|사원|그룹) 의 코드</param>
+      <param name="ownerKind">소유자의 종류 (부서|사원|그룹 등)</param>
+      <param name="category">분류</param>
+      <param name="fileName">파일명</param>
+      <param name="fileType">파일 종류</param>
+      <param name="fileGroup">파일 그룹</param>
+      <param name="fileFloor">파일 Floor</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.BuildCriteriaOfFile(NSoft.NAccess.Domain.Model.FileMapping,System.String,System.String,System.String,System.Nullable{NSoft.NAccess.ActorKinds},System.String,System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+      <summary>
+        <see cref="T:NSoft.NAccess.Domain.Model.File" /> 정보를 조회하기 위한 Criteria를 빌드합니다.
+            </summary>
+      <param name="fileMapping">파일 매핑 정보</param>
+      <param name="resourceId">리소스 Id</param>
+      <param name="resourceKind">리소스 종류</param>
+      <param name="ownerCode">소유자 (부서|사원|그룹) 의 코드</param>
+      <param name="ownerKind">소유자의 종류 (부서|사원|그룹 등)</param>
+      <param name="category">분류</param>
+      <param name="fileName">파일명</param>
+      <param name="fileType">파일 종류</param>
+      <param name="fileGroup">파일 그룹</param>
+      <param name="fileFloor">파일 Floor</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.CreateFile(System.String,System.String,NSoft.NAccess.Domain.Model.FileMapping)">
+      <summary>
+            새로운 파일 정보를 생성합니다.
+            </summary>
+      <param name="fileMapping">파일 매핑 정보</param>
+      <param name="category">분류</param>
+      <param name="fileName">파일명</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.FindAllFileByFileMapping(NSoft.NAccess.Domain.Model.FileMapping)">
+      <summary>
+            지정한 <see cref="T:NSoft.NAccess.Domain.Model.FileMapping" /> 정보와 연관된 File 정보를 조회합니다.
+            </summary>
+      <param name="fileMapping">파일 매핑 정보</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.FindAllFileByOwner(System.String,System.Nullable{NSoft.NAccess.ActorKinds})">
+      <summary>
+            소유자로 파일을 찾습니다.
+            </summary>
+      <param name="ownerCode">소유자 (부서|사원|그룹) 의 코드</param>
+      <param name="ownerKind">소유자의 종류 (부서|사원|그룹 등)</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.FindAllFileByResource(System.String,System.String)">
+      <summary>
+            지정한 리소스 정보를 가진 File을 조회합니다.
+            </summary>
+      <param name="resourceId">리소스 ID</param>
+      <param name="resourceKind">리소스 종류</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.GetPageOfFileByOwner(System.String,System.Nullable{NSoft.NAccess.ActorKinds},System.Int32,System.Int32,NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.File}[])">
+      <summary>
+            지정한 소유자의 모든 File을 Paging 처리해서 로드합니다.
+            </summary>
+      <param name="ownerCode">소유자 (부서|사원|그룹) 의 코드</param>
+      <param name="ownerKind">소유자의 종류 (부서|사원|그룹 등)</param>
+      <param name="pageIndex">페이지 인덱스 (0부터 시작)</param>
+      <param name="pageSize">페이지 크기 (0보다 커야 한다. 보통 10)</param>
+      <param name="orders">정렬 순서</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.GetPageOfFileByResource(System.String,System.String,System.Int32,System.Int32,NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.File}[])">
+      <summary>
+            리소스 정보를 가진 File을 Paging 처리해서 로드합니다.
+            </summary>
+      <param name="resourceId">리소스 ID</param>
+      <param name="resourceKind">리소스 종류</param>
+      <param name="pageIndex">페이지 인덱스 (0부터 시작)</param>
+      <param name="pageSize">페이지 크기 (0보다 커야 한다. 보통 10)</param>
+      <param name="orders">정렬 순서</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.DeleteAllFileByFileMapping(NSoft.NAccess.Domain.Model.FileMapping)">
+      <summary>
+            지정된 파일매핑 정보를 가진 모든 File 정보를 삭제합니다.
+            </summary>
+      <param name="fileMapping">
+      </param>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.BuildQueryOverOfMasterCode(NSoft.NAccess.Domain.Model.Product,System.String,System.String,System.Nullable{System.Boolean})">
+      <summary>
+            MasterCode 를 조회하기 위해 QueryOver 를 빌드합니다.
+            </summary>
+      <param name="product">제품</param>
+      <param name="code">MasterCode의 코드</param>
+      <param name="name">MasterCode의 Name</param>
+      <param name="isActive">사용여부</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.BuildCriteriaOfMasterCode(NSoft.NAccess.Domain.Model.Product,System.String,System.String,System.Nullable{System.Boolean})">
+      <summary>
+            MasterCode 를 조회하기 위해 Criteria를 빌드합니다.
+            </summary>
+      <param name="product">제품</param>
+      <param name="code">MasterCode의 코드</param>
+      <param name="name">MasterCode의 Name</param>
+      <param name="isActive">사용여부</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.GetOrCreateMasterCode(NSoft.NAccess.Domain.Model.Product,System.String)">
+      <summary>
+            MasterCode를 조회합니다. 없다면 새로 생성합니다.
+            </summary>
+      <param name="product">
+      </param>
+      <param name="code">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.CreateMasterCode(NSoft.NAccess.Domain.Model.Product,System.String,System.String,System.Nullable{System.Boolean},System.String,System.String)">
+      <summary>
+            새로운 MasterCode를 생성합니다.
+            </summary>
+      <param name="product">제품</param>
+      <param name="code">MasterCode의 코드</param>
+      <param name="name">MasterCode의 Name</param>
+      <param name="isActive">사용여부</param>
+      <param name="description">설명</param>
+      <param name="exAttr">확장속성</param>
+      <returns>새로 생성된 MasterCode</returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.FindOneMasterCodeByCode(NSoft.NAccess.Domain.Model.Product,System.String)">
+      <summary>
+            코드정보로 MasterCode를 조회합니다.
+            </summary>
+      <param name="product">제품</param>
+      <param name="code">찾을 코드 값</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.FindAllMasterCodeByProduct(NSoft.NAccess.Domain.Model.Product,NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.MasterCode}[])">
+      <summary>
+            제품에 소속된 모든 MasterCode를 조회합니다.
+            </summary>
+      <param name="product">제품</param>
+      <param name="orders">정렬 순서</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.FindAllActiveMasterCodeByProduct(NSoft.NAccess.Domain.Model.Product,NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.MasterCode}[])">
+      <summary>
+            제품에 소속된 모든 사용가능한 MasterCode를 조회합니다.
+            </summary>
+      <param name="product">제품</param>
+      <param name="orders">정렬 순서</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.FindAllMasterCodeByProduct(NSoft.NAccess.Domain.Model.Product,System.Int32,System.Int32,NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.MasterCode}[])">
+      <summary>
+            제품에 소속된 모든 MasterCode를 Paging 처리해서 로드합니다.
+            </summary>
+      <param name="product">제품</param>
+      <param name="pageIndex">페이지 인덱스 (0부터 시작)</param>
+      <param name="pageSize">페이지 크기 (0보다 커야 한다. 보통 10)</param>
+      <param name="orders">정렬 순서</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.CreateMasterCodeItem(NSoft.NAccess.Domain.Model.MasterCode,System.String,System.String,System.String,System.Nullable{System.Int32})">
+      <summary>
+            새로운 MasterCodeItem을 생성합니다.
+            </summary>
+      <param name="masterCode">MasterCode 인스턴스</param>
+      <param name="itemCode">Item Code</param>
+      <param name="itemName">Item Name (표시명)</param>
+      <param name="itemValue">Item Value (값)</param>
+      <param name="viewOrder">정렬 순서</param>
+      <returns>새로운 <see cref="T:NSoft.NAccess.Domain.Model.MasterCodeItem" /></returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.CreateMasterCodeItem(NSoft.NAccess.Domain.Model.MasterCode,System.String,System.String,System.String)">
+      <summary>
+            새로운 MasterCodeItem을 생성합니다.
+            </summary>
+      <param name="masterCode">MasterCode 인스턴스</param>
+      <param name="itemCode">Item Code</param>
+      <param name="itemName">Item Name (표시명)</param>
+      <param name="itemValue">Item Value (값)</param>
+      <returns>새로운 <see cref="T:NSoft.NAccess.Domain.Model.MasterCodeItem" /></returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.CreateMasterCodeItem(NSoft.NAccess.Domain.Model.MasterCode,System.String,System.String)">
+      <summary>
+            새로운 MasterCodeItem을 생성합니다.
+            </summary>
+      <param name="masterCode">MasterCode 인스턴스</param>
+      <param name="itemCode">Item Code</param>
+      <param name="itemValue">Item Value (값)</param>
+      <returns>새로운 <see cref="T:NSoft.NAccess.Domain.Model.MasterCodeItem" /></returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.FindAllMasterCodeItemByProduct(NSoft.NAccess.Domain.Model.Product,NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.MasterCodeItem}[])">
+      <summary>
+            제품에 속한 모든 <see cref="T:NSoft.NAccess.Domain.Model.MasterCodeItem" /> 정보를 조회합니다.
+            </summary>
+      <param name="product">제품</param>
+      <param name="orders">정렬순서</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.GetPageOfMasterCodeItemByProduct(NSoft.NAccess.Domain.Model.Product,System.Int32,System.Int32,NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.MasterCodeItem}[])">
+      <summary>
+            제품에 소속된 MasterCodeItem를 Paging 처리해서 로드합니다.
+            </summary>
+      <param name="product">제품</param>
+      <param name="pageIndex">페이지 인덱스 (0부터 시작)</param>
+      <param name="pageSize">페이지 크기 (0보다 커야 한다. 보통 10)</param>
+      <param name="orders">정렬 순서</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.BuildQueryOverOfMenuTemplate(NSoft.NAccess.Domain.Model.Product,System.String,System.String)">
+      <summary>
+        <see cref="T:NSoft.NAccess.Domain.Model.MenuTemplate" />를 조회하기 위한 Criteria를 빌드합니다.
+            </summary>
+      <param name="product">제품</param>
+      <param name="code">MenuTemplate 코드</param>
+      <param name="name">MenuTemplate 명</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.BuildCriteriaOfMenuTemplate(NSoft.NAccess.Domain.Model.Product,System.String,System.String)">
+      <summary>
+        <see cref="T:NSoft.NAccess.Domain.Model.MenuTemplate" />를 조회하기 위한 Criteria를 빌드합니다.
+            </summary>
+      <param name="product">제품</param>
+      <param name="code">MenuTemplate 코드</param>
+      <param name="name">MenuTemplate 명</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.GetOrCreateMenuTemplate(NSoft.NAccess.Domain.Model.Product,System.String)">
+      <summary>
+            메뉴템플릿을 조회합니다. 없다면 새로 생성해서 반환합니다.
+            </summary>
+      <param name="product">
+      </param>
+      <param name="code">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.CreateMenuTemplate(NSoft.NAccess.Domain.Model.Product,System.String,System.String,System.String)">
+      <summary>
+            새로운 메뉴 템플릿을 생성합니다.
+            </summary>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.CreateMenuTemplateOf(NSoft.NAccess.Domain.Model.MenuTemplate,System.String,System.String,System.String)">
+      <summary>
+            지정된 부모 메뉴 템플릿의 하위로 자식 메뉴 템플릿을 생성합니다.
+            </summary>
+      <param name="parent">
+      </param>
+      <param name="code">
+      </param>
+      <param name="name">
+      </param>
+      <param name="menuUrl">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.ChangeMenuTemplateParent(NSoft.NAccess.Domain.Model.MenuTemplate,NSoft.NAccess.Domain.Model.MenuTemplate)">
+      <summary>
+            지정된 메뉴 템플릿을 새로운 부모의 자식으로 등록합니다.
+            </summary>
+      <param name="child">
+      </param>
+      <param name="newParent">
+      </param>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.FindOneMenuTemplateByCode(NSoft.NAccess.Domain.Model.Product,System.String)">
+      <summary>
+            지정한 Id 값을 가진 MenuTemplate를 조회합니다.
+            </summary>
+      <param name="product">소속 product</param>
+      <param name="code">menu template id</param>
+      <returns>메뉴 정보, 없으면 null을 반환한다.</returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.FindRootMenuTemplateByProduct(NSoft.NAccess.Domain.Model.Product,NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.MenuTemplate}[])">
+      <summary>
+            제품별로 메뉴 템플릿의 Root 템플릿을 가져옵니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.FindAllMenuTemplateByProduct(NSoft.NAccess.Domain.Model.Product,NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.MenuTemplate}[])">
+      <summary>
+            지정한 제품의 모든 메뉴 템플릿 정보를 조회합니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.FindAllMenuTemplateByNameToMatch(NSoft.NAccess.Domain.Model.Product,System.String,NHibernate.Criterion.MatchMode,NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.MenuTemplate}[])">
+      <summary>
+            메뉴 템플릿 이름이 매칭되는 검색을 수행합니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.FildAllMenuTemplateByHierarchy(NSoft.NAccess.Domain.Model.Product,System.String,NSoft.NAccess.HierarchyContainsKinds)">
+      <summary>
+            지정된 Id에 해당하는 메뉴 템플릿을 조회합니다. 옵션으로 조상, 자손 메뉴 템플릿도 가져올 수 있도록 합니다.
+            </summary>
+      <param name="product">제품 정보</param>
+      <param name="menuTemplateId">메뉴 템플릿 Id</param>
+      <param name="hierarchyContainsKinds">메뉴 템플릿의 조상/자손도 포함할 것인가 여부</param>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.DeleteMenuTemplate(NSoft.NAccess.Domain.Model.MenuTemplate)">
+      <summary>
+            지정한 메뉴 템플릿 정보를 삭제합니다. HBM의 cascade 설정에 따라 cascade-delete가 수행될 수 있습니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.DeleteMenuTemplateByCode(NSoft.NAccess.Domain.Model.Product,System.String)">
+      <summary>
+            지정된 Id 정보를 가진 메뉴 템플릿을 삭제합니다. HBM의 cascade 설정에 따라 cascade-delete가 수행될 수 있습니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.DeleteAllMenuTemplateByProduct(NSoft.NAccess.Domain.Model.Product)">
+      <summary>
+            지정된 제품에 소속된 모든 MenuTemplate를 삭제합니다.
+            </summary>
+      <param name="product">
+      </param>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.BuildQueryOverOfMenu(NSoft.NAccess.Domain.Model.Product,System.String,NSoft.NAccess.Domain.Model.MenuTemplate,System.Nullable{System.Boolean})">
+      <summary>
+        <see cref="T:NSoft.NAccess.Domain.Model.Menu" />정보를 조회하기 위한 Criteria를 빌드합니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.BuildCriteriaOfMenu(NSoft.NAccess.Domain.Model.Product,System.String,NSoft.NAccess.Domain.Model.MenuTemplate,System.Nullable{System.Boolean})">
+      <summary>
+        <see cref="T:NSoft.NAccess.Domain.Model.Menu" />정보를 조회하기 위한 Criteria를 빌드합니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.GetOrCreateMenu(NSoft.NAccess.Domain.Model.MenuTemplate,System.String)">
+      <summary>
+            메뉴를 조회합니다. 없으면 새로 생성합니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.CreateMenu(NSoft.NAccess.Domain.Model.MenuTemplate,System.String)">
+      <summary>
+            새로운 메뉴를 생성합니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.CreateMenuOf(NSoft.NAccess.Domain.Model.Menu,System.String,NSoft.NAccess.Domain.Model.MenuTemplate)">
+      <summary>
+            지정된 부모 메뉴의 자식 메뉴를 생성합니다.
+            </summary>
+      <param name="parent">부모 메뉴</param>
+      <param name="code">새로운 메뉴의 Id</param>
+      <param name="menuTemplate">새로운 메뉴의 메뉴 템플릿 정보</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.ChangeMenuParent(NSoft.NAccess.Domain.Model.Menu,NSoft.NAccess.Domain.Model.Menu)">
+      <summary>
+            지정된 자식 Menu의 부모를 지정된 Menu로 변경합니다.
+            </summary>
+      <param name="child">child menu</param>
+      <param name="newParent">new parent menu</param>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.FindOneMenuByTemplateAndCode(NSoft.NAccess.Domain.Model.MenuTemplate,System.String)">
+      <summary>
+            메뉴코드로 메뉴를 조회합니다.
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.FindOneMenuByProductAndCode(NSoft.NAccess.Domain.Model.Product,System.String)">
+      <summary>
+            메뉴코드로 메뉴를 조회합니다.
+            </summary>
+      <param name="product">소속 product</param>
+      <param name="code">menu id</param>
+      <returns>메뉴 정보, 없으면 null을 반환한다.</returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.FindRootMenuByProduct(NSoft.NAccess.Domain.Model.Product)">
+      <summary>
+            제품별 Root Menu 정보 (Parent가 null인) 정보를 조회합니다.
+            </summary>
+      <param name="product">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.FindAllMenuByProduct(NSoft.NAccess.Domain.Model.Product)">
+      <summary>
+            지정된 제품에 소속된 모든 메뉴 정보를 조회합니다.
+            </summary>
+      <param name="product">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.FindAllMenuByMenuTemplate(NSoft.NAccess.Domain.Model.MenuTemplate)">
+      <summary>
+            지정된 MenuTemplate와 관계된 Menu 들을 조회합니다.
+            </summary>
+      <param name="menuTemplate">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.FindAllMenuByHierarchy(NSoft.NAccess.Domain.Model.Product,System.String,NSoft.NAccess.HierarchyContainsKinds)">
+      <summary>
+            지정된 Id에 해당하는 메뉴를 조회합니다. 옵션으로 조상, 자손 메뉴도 가져올 수 있도록 합니다.
+            </summary>
+      <param name="product">제품</param>
+      <param name="code">메뉴 Id</param>
+      <param name="hierarchyContainsKinds">메뉴의 조상/자손도 포함할 것인가 여부</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.DeleteMenu(NSoft.NAccess.Domain.Model.Menu)">
+      <summary>
+            지정된 메뉴를 삭제합니다.
+            </summary>
+      <param name="menu">
+      </param>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.DeleteMenuByCode(NSoft.NAccess.Domain.Model.Product,System.String)">
+      <summary>
+            Id에 해당하는 Menu를 삭제합니다.
+            </summary>
+      <param name="product">
+      </param>
+      <param name="code">
+      </param>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.DeleteAllMenuByProduct(NSoft.NAccess.Domain.Model.Product)">
+      <summary>
+            제품에 소속된 모든 메뉴를 삭제합니다.
+            </summary>
+      <param name="product">
+      </param>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.DeleteAllMenuByMenuTemplate(NSoft.NAccess.Domain.Model.MenuTemplate)">
+      <summary>
+            지정된 MenuTemplate과 관련된 모든 메뉴를 삭제합니다.
+            </summary>
+      <param name="menuTemplate">
+      </param>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.BuildQueryOverOfProduct(System.String,System.String,System.Nullable{System.Boolean})">
+      <summary>
+            제품 정보를 조회하기 위해 Criteria를 빌드합니다.
+            </summary>
+      <param name="code">제품 코드</param>
+      <param name="name">제품 명</param>
+      <param name="isActive">활성화 여부</param>
+      <returns>질의용 Criteria</returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.BuildCriteriaOfProduct(System.String,System.String,System.Nullable{System.Boolean})">
+      <summary>
+            제품 정보를 조회하기 위해 Criteria를 빌드합니다.
+            </summary>
+      <param name="code">제품 코드</param>
+      <param name="name">제품 명</param>
+      <param name="isActive">활성화 여부</param>
+      <returns>질의용 Criteria</returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.GetOrCreateProduct(System.String)">
+      <summary>
+            지정된 제품 코드에 해당하는 정보를 로드합니다. 만약 없다면, 새로 생성하고, 저장한 후 반환합니다.
+            </summary>
+      <param name="code">제품 코드</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.FindOneProductByCode(System.String)">
+      <summary>
+            지정한 제품 코드에 해당하는 제품을 조회합니다. 없으면 null을 반환합니다.
+            </summary>
+      <param name="code">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.FindOneProductByName(System.String)">
+      <summary>
+            지정된 제품이름의 제품 정보를 로드합니다.
+            </summary>
+      <param name="name">
+      </param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.FindAllActiveProduct">
+      <summary>
+            Active인 Product를 조회합니다.
+            </summary>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.FindAllProductByNameToMatch(System.String,NHibernate.Criterion.MatchMode)">
+      <summary>
+            제품명 매칭 검색을 수행합니다.
+            </summary>
+      <param name="nameToMatch">매칭 검색할 제품명</param>
+      <param name="matchMode">매칭 모드</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.DeleteProduct(NSoft.NAccess.Domain.Model.Product)">
+      <summary>
+            지정된 Product 를 삭제합니다.
+            </summary>
+      <param name="product">
+      </param>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.BuildQueryOverOfResource(NSoft.NAccess.Domain.Model.Product,System.String,System.String)">
+      <summary>
+            리소스 정보를 조회하기 위한 Criteria를 빌드합니다.
+            </summary>
+      <param name="product">제품</param>
+      <param name="code">리소스 코드</param>
+      <param name="name">리소스 명</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.BuildCriteriaOfResource(NSoft.NAccess.Domain.Model.Product,System.String,System.String)">
+      <summary>
+            리소스 정보를 조회하기 위한 Criteria를 빌드합니다.
+            </summary>
+      <param name="product">제품</param>
+      <param name="code">리소스 코드</param>
+      <param name="name">리소스 명</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.GetOrCreateResource(NSoft.NAccess.Domain.Model.Product,System.String)">
+      <summary>
+            리소스 정보를 로드합니다. 없다면, 새로 생성, 저장 후 반환합니다.
+            </summary>
+      <param name="product">리소스가 정의된 제품</param>
+      <param name="code">리소스 Id</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.FindOneResourceByCode(NSoft.NAccess.Domain.Model.Product,System.String)">
+      <summary>
+            리소스 정보를 조회합니다.
+            </summary>
+      <param name="product">제품</param>
+      <param name="code">리소스 코드</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.FindAllResourceByProduct(NSoft.NAccess.Domain.Model.Product)">
+      <summary>
+            지정된 제품의 모든 리소스 정보를 조회합니다.
+            </summary>
+      <param name="product">제품</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.FindAllResourceByNameToMatch(NSoft.NAccess.Domain.Model.Product,System.String,NHibernate.Criterion.MatchMode)">
+      <summary>
+            리소스 이름으로 매칭된 리소스 정보를 조회합니다.
+            </summary>
+      <param name="product">제품</param>
+      <param name="nameToMatch">검색하고자 하는 리소스 명</param>
+      <param name="matchMode">매칭 모드</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.GetPageOfResourceByProduct(NSoft.NAccess.Domain.Model.Product,System.Int32,System.Int32,NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.Resource}[])">
+      <summary>
+            지정된 제품의 리소스 정보를 Paging 처리해서 로드합니다.
+            </summary>
+      <param name="product">제품</param>
+      <param name="pageIndex">페이지 인덱스 (0부터 시작)</param>
+      <param name="pageSize">페이지 크기 (0보다 커야 한다. 보통 10)</param>
+      <param name="orders">정렬 순서</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.GetPageOfResourceByCodeToMatch(NSoft.NAccess.Domain.Model.Product,System.String,NHibernate.Criterion.MatchMode,System.Int32,System.Int32,NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.Resource}[])">
+      <summary>
+            Resource 정보를 Name 매칭 검색 결과를 Paging처리해서 로드합니다.
+            </summary>
+      <param name="product">제품</param>
+      <param name="codeToMatch">검색하고자 하는 리소스 명</param>
+      <param name="matchMode">매칭 모드</param>
+      <param name="pageIndex">페이지 인덱스 (0부터 시작)</param>
+      <param name="pageSize">페이지 크기 (0보다 커야 한다. 보통 10)</param>
+      <param name="orders">정렬 순서</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.GetPageOfResourceByNameToMatch(NSoft.NAccess.Domain.Model.Product,System.String,NHibernate.Criterion.MatchMode,System.Int32,System.Int32,NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.Resource}[])">
+      <summary>
+            Resource 정보를 Name 매칭 검색 결과를 Paging처리해서 로드합니다.
+            </summary>
+      <param name="product">제품</param>
+      <param name="nameToMatch">검색하고자 하는 리소스 명</param>
+      <param name="matchMode">매칭 모드</param>
+      <param name="pageIndex">페이지 인덱스 (0부터 시작)</param>
+      <param name="pageSize">페이지 크기 (0보다 커야 한다. 보통 10)</param>
+      <param name="orders">정렬 순서</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.BuildQueryOverOfUserConfig(System.String,System.String,System.String,System.String,System.String)">
+      <summary>
+            사용자 설정 정보를 조회하기 위한 Criteria를 빌드합니다.
+            </summary>
+      <param name="productCode">제품 코드</param>
+      <param name="companyCode">사용자 소속 회사 코드</param>
+      <param name="userCode">사용자 코드</param>
+      <param name="key">환경설정 키</param>
+      <param name="value">환경설정 값</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.BuildCriteriaOfUserConfig(System.String,System.String,System.String,System.String,System.String)">
+      <summary>
+            사용자 설정 정보를 조회하기 위한 Criteria를 빌드합니다.
+            </summary>
+      <param name="productCode">제품 코드</param>
+      <param name="companyCode">사용자 소속 회사 코드</param>
+      <param name="userCode">사용자 코드</param>
+      <param name="key">환경설정 키</param>
+      <param name="value">환경설정 값</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.GetOrCreateUserConfig(NSoft.NAccess.Domain.Model.Product,NSoft.NAccess.Domain.Model.User,System.String)">
+      <summary>
+            사용자 환경설정 정보를 조회합니다. 없다면, 새로 생성해서 저장 후 반환합니다.
+            </summary>
+      <param name="product">제품 정보</param>
+      <param name="user">사용자 정보</param>
+      <param name="key">설정 키</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.GetUserConfigValue(NSoft.NAccess.Domain.Model.Product,NSoft.NAccess.Domain.Model.User,System.String,System.String)">
+      <summary>
+            사용자 환경설정 정보의 값을 가져옵니다. 환경설정 정보가 없거나, Value나 DefaultValue 속성이 빈문자열이라면 지정된 기본값을 반환합니다.
+            </summary>
+      <param name="product">제품</param>
+      <param name="user">사용자</param>
+      <param name="key">설정 키</param>
+      <param name="defaultValue">기본 값 (설정값이 정의되어 있지 않았을 경우)</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.FindOneUserConfigById(NSoft.NAccess.Domain.Model.Product,NSoft.NAccess.Domain.Model.User,System.String)">
+      <summary>
+            사용자 환경설정 정보를 조회합니다.
+            </summary>
+      <param name="product">제품</param>
+      <param name="user">사용자</param>
+      <param name="key">설정 키</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.FindAllUserConfigByProductAndCompany(NSoft.NAccess.Domain.Model.Product,NSoft.NAccess.Domain.Model.Company)">
+      <summary>
+            지정된 회사에 소속된 모든 사용자의 UserConfig 정보를 조회합니다.
+            </summary>
+      <param name="product">제품</param>
+      <param name="company">회사</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.FindAllUserConfigByUser(NSoft.NAccess.Domain.Model.User)">
+      <summary>
+            지정된 사용자의 모든 UserConfig 정보를 조회합니다.
+            </summary>
+      <param name="user">사용자</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.GetPageOfUserConfigByProductAndCompany(NSoft.NAccess.Domain.Model.Product,NSoft.NAccess.Domain.Model.Company,System.Int32,System.Int32,NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.UserConfig}[])">
+      <summary>
+            지정된 회사에 소속된 모든 사용자의 UserConfig 정보를 Paging 처리해서 로드합니다.
+            </summary>
+      <param name="product">검색 대상 제품</param>
+      <param name="company">검색 대상 회사</param>
+      <param name="pageIndex">Page Index (0부터 시작합니다.)</param>
+      <param name="pageSize">Page Size (보통 10입니다. 0보다 커야 합니다.)</param>
+      <param name="orders">정렬 순서</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.GetPageOfUserConfigByUser(NSoft.NAccess.Domain.Model.User,System.Int32,System.Int32,NSoft.NFramework.Data.NHibernateEx.INHOrder{NSoft.NAccess.Domain.Model.UserConfig}[])">
+      <summary>
+            지정된 사용자의 UserConfig 정보를 Paging 처리해서 로드합니다.
+            </summary>
+      <param name="user">사용자</param>
+      <param name="pageIndex">Page Index (0부터 시작합니다.)</param>
+      <param name="pageSize">Page Size (보통 10입니다. 0보다 커야 합니다.)</param>
+      <param name="orders">정렬 순서</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.DeleteUserConfigById(NSoft.NAccess.Domain.Model.Product,NSoft.NAccess.Domain.Model.User,System.String)">
+      <summary>
+            UserConfig(사용자 환경설정) 정보를 삭제합니다.
+            </summary>
+      <param name="product">제품</param>
+      <param name="user">사용자</param>
+      <param name="key">설정 키</param>
+    </member>
+    <member name="M:NSoft.NAccess.Domain.Repositories.ProductRepository.DeleteAllUserConfigByUser(NSoft.NAccess.Domain.Model.User)">
+      <summary>
+            지정된 사용자의 모든 <see cref="T:NSoft.NAccess.Domain.Model.UserConfig" /> 정보를 삭제합니다.
+            </summary>
+      <param name="user">사용자</param>
+    </member>
+    <member name="T:NSoft.NAccess.Domain.Repositories.DomainContext">
+      <summary>
+            Domain Context
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.ActorKinds">
+      <summary>
+            리소스에 접근할 수 있는 Actor 의 종류
+            </summary>
+    </member>
+    <member name="F:NSoft.NAccess.ActorKinds.Unknown">
+      <summary>
+            알 수 없음
+            </summary>
+    </member>
+    <member name="F:NSoft.NAccess.ActorKinds.User">
+      <summary>
+            사용자
+            </summary>
+    </member>
+    <member name="F:NSoft.NAccess.ActorKinds.Department">
+      <summary>
+            부서
+            </summary>
+    </member>
+    <member name="F:NSoft.NAccess.ActorKinds.Group">
+      <summary>
+            그룹
+            </summary>
+    </member>
+    <member name="F:NSoft.NAccess.ActorKinds.Part">
+      <summary>
+            파트
+            </summary>
+    </member>
+    <member name="F:NSoft.NAccess.ActorKinds.Company">
+      <summary>
+            회사
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.AuthorityKinds">
+      <summary>
+            권한 종류
+            </summary>
+    </member>
+    <member name="F:NSoft.NAccess.AuthorityKinds.Nothing">
+      <summary>
+            없음
+            </summary>
+    </member>
+    <member name="F:NSoft.NAccess.AuthorityKinds.Read">
+      <summary>
+            읽기
+            </summary>
+    </member>
+    <member name="F:NSoft.NAccess.AuthorityKinds.Write">
+      <summary>
+            쓰기
+            </summary>
+    </member>
+    <member name="F:NSoft.NAccess.AuthorityKinds.Edit">
+      <summary>
+            편집
+            </summary>
+    </member>
+    <member name="F:NSoft.NAccess.AuthorityKinds.Delete">
+      <summary>
+            삭제
+            </summary>
+    </member>
+    <member name="F:NSoft.NAccess.AuthorityKinds.All">
+      <summary>
+            모든 권한
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.CalendarOwnerKind">
+      <summary>
+            Calendar 소유자 종류
+            </summary>
+    </member>
+    <member name="F:NSoft.NAccess.CalendarOwnerKind.Unknown">
+      <summary>
+            Unknown
+            </summary>
+    </member>
+    <member name="F:NSoft.NAccess.CalendarOwnerKind.Standard">
+      <summary>
+            표준 (Owner가 없음)
+            </summary>
+    </member>
+    <member name="F:NSoft.NAccess.CalendarOwnerKind.User">
+      <summary>
+            사용자
+            </summary>
+    </member>
+    <member name="F:NSoft.NAccess.CalendarOwnerKind.Department">
+      <summary>
+            부서 
+            </summary>
+    </member>
+    <member name="F:NSoft.NAccess.CalendarOwnerKind.Group">
+      <summary>
+            그룹
+            </summary>
+    </member>
+    <member name="F:NSoft.NAccess.CalendarOwnerKind.Company">
+      <summary>
+            회사
+            </summary>
+    </member>
+    <member name="F:NSoft.NAccess.CalendarOwnerKind.System">
+      <summary>
+            System
+            </summary>
+    </member>
+    <member name="F:NSoft.NAccess.CalendarOwnerKind.Project">
+      <summary>
+            Project
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.GroupKinds">
+      <summary>
+            그룹 (가상의 사용자 집단)의 종류
+            </summary>
+    </member>
+    <member name="F:NSoft.NAccess.GroupKinds.Unknown">
+      <summary>
+            Unknown
+            </summary>
+    </member>
+    <member name="F:NSoft.NAccess.GroupKinds.System">
+      <summary>
+            System defined group
+            </summary>
+    </member>
+    <member name="F:NSoft.NAccess.GroupKinds.Custom">
+      <summary>
+            User custom defined group
+            </summary>
+    </member>
+    <member name="F:NSoft.NAccess.GroupKinds.All">
+      <summary>
+            All
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.HierarchyContainsKinds">
+      <summary>
+            계층구조상에서 선택 사항에 대한 종류를 나타낸다.
+            </summary>
+    </member>
+    <member name="F:NSoft.NAccess.HierarchyContainsKinds.Self">
+      <summary>
+            자신
+            </summary>
+    </member>
+    <member name="F:NSoft.NAccess.HierarchyContainsKinds.Descendents">
+      <summary>
+            자손들 (자신을 제외한)
+            </summary>
+    </member>
+    <member name="F:NSoft.NAccess.HierarchyContainsKinds.SelfAndDescendents">
+      <summary>
+            자신과 자손들
+            </summary>
+    </member>
+    <member name="F:NSoft.NAccess.HierarchyContainsKinds.Ancestors">
+      <summary>
+            조상들 (자신을 제외한)
+            </summary>
+    </member>
+    <member name="F:NSoft.NAccess.HierarchyContainsKinds.SelfAndAncestors">
+      <summary>
+            자신과 조상들
+            </summary>
+    </member>
+    <member name="F:NSoft.NAccess.HierarchyContainsKinds.DescendentsAndAncestors">
+      <summary>
+            자신을 제외한 자손과 조상들
+            </summary>
+    </member>
+    <member name="F:NSoft.NAccess.HierarchyContainsKinds.All">
+      <summary>
+            모두
+            </summary>
+    </member>
+    <member name="F:NSoft.NAccess.NAccessContext.LibraryName">
+      <summary>
+            Library Name
+            </summary>
+    </member>
+    <member name="F:NSoft.NAccess.NAccessContext.Administrator">
+      <summary>
+            UserId of Administrator
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.NAccessContext.Current">
+      <summary>
+            Current Thread Context에서 공통으로 사용할 정보를 나타냅니다.
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.NAccessContext.Current.CompanyCode">
+      <summary>
+            현재 지정된 회사 코드
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.NAccessContext.Current.Company">
+      <summary>
+            현 컨텍스트에 지정된 <see cref="P:NSoft.NAccess.NAccessContext.Current.Company" /> 정보
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.NAccessContext.Current.DepartmentCode">
+      <summary>
+            현재 부서 코드
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.NAccessContext.Current.Department">
+      <summary>
+            현 컨텍스트에 지정된 부서 정보
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.NAccessContext.Current.UserCode">
+      <summary>
+            현재 사용자 코드
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.NAccessContext.Current.User">
+      <summary>
+            현 컨텍스트에 지정된 사용자 정보
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.NAccessContext.Domains">
+      <summary>
+            Domain Services
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.NAccessContext.Domains.CalendarRepository">
+      <summary>
+            Calendar Domain Service
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.NAccessContext.Domains.OrganizationRepository">
+      <summary>
+            Organization Domain Service
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.NAccessContext.Domains.ProductRepository">
+      <summary>
+            Product Domain Service
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.NAccessContext.Domains.LoggingRepository">
+      <summary>
+            Logging Domain Service
+            </summary>
+    </member>
+    <member name="T:NSoft.NAccess.NAccessContext.Linq">
+      <summary>
+            Domain Models for Linq
+            </summary>
+    </member>
+    <member name="M:NSoft.NAccess.NAccessContext.Linq.GetQuery``1">
+      <summary>
+            현재 사용중인 Session을 사용하는 IQueryable{T}를 반환합니다.
+            </summary>
+      <typeparam name="T">
+      </typeparam>
+      <returns>
+      </returns>
+    </member>
+    <member name="M:NSoft.NAccess.NAccessContext.Linq.GetQuery``1(NHibernate.IStatelessSession)">
+      <summary>
+            지정된 <see cref="T:NHibernate.IStatelessSession" />을 사용하는 IQueryable{T}를 생성합니다.
+            </summary>
+      <typeparam name="T">
+      </typeparam>
+      <param name="statelessSession">Stateless session</param>
+      <returns>
+      </returns>
+    </member>
+    <member name="P:NSoft.NAccess.NAccessContext.Linq.Codes">
+      <summary>
+            Code
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.NAccessContext.Linq.Companies">
+      <summary>
+            Company
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.NAccessContext.Linq.Departments">
+      <summary>
+            Department
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.NAccessContext.Linq.DepartmentMembers">
+      <summary>
+            Department Members
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.NAccessContext.Linq.EmployeeGrades">
+      <summary>
+            EmployeeGrade
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.NAccessContext.Linq.EmployeePositions">
+      <summary>
+            EmployeePosition
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.NAccessContext.Linq.EmployeeTitles">
+      <summary>
+            EmployeeTitle
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.NAccessContext.Linq.Groups">
+      <summary>
+            Group (가상 조직)
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.NAccessContext.Linq.GroupActors">
+      <summary>
+            그룹 - 소속원 관계 (소속원은 Company, Department, User 등이 될 수 있다)
+            </summary>
+    </member>
+    <member name="P:NSoft.NAccess.NAccessContext.Linq.Users">
+      <summary>
+            User (사용자)
+            </summary>
+    </member>
+  </members>
+</doc>
